@@ -164,9 +164,11 @@ RCT_EXPORT_METHOD(create: body callback:(RCTResponseSenderBlock)callback)
     // Save the document to the database
     CDTDocumentRevision *revision = [datastore createDocumentFromRevision:rev error:&error];
     
+    NSDictionary *dict = @{ @"id" : revision.docId, @"rev" : revision.revId, @"body" : revision.body };
+    
     if(!error)
     {
-        NSArray *params = @[revision.body, revision.docId, revision.revId];
+        NSArray *params = @[dict];
         callback(@[[NSNull null], params]);
     }
     else{
@@ -175,7 +177,8 @@ RCT_EXPORT_METHOD(create: body callback:(RCTResponseSenderBlock)callback)
     
 }
 
-RCT_EXPORT_METHOD(read: (NSString *)id callback:(RCTResponseSenderBlock)callback)
+
+RCT_EXPORT_METHOD(retrieve: (NSString *)id callback:(RCTResponseSenderBlock)callback)
 {
     NSError *error = nil;
     
@@ -184,7 +187,7 @@ RCT_EXPORT_METHOD(read: (NSString *)id callback:(RCTResponseSenderBlock)callback
     
     if(!error)
     {
-        NSArray *params = @[retrieved.body, retrieved.docId, retrieved.revId];
+        NSArray *params = @[retrieved.docId, retrieved.revId, retrieved.body];
         callback(@[[NSNull null], params]);
     }
     else{
@@ -192,6 +195,48 @@ RCT_EXPORT_METHOD(read: (NSString *)id callback:(RCTResponseSenderBlock)callback
     }
 }
 
+RCT_EXPORT_METHOD(update: (NSString *)id rev:(NSString *)rev  body:(NSDictionary *)body callback:(RCTResponseSenderBlock)callback)
+{
+    NSError *error = nil;
+    
+    // Read a document
+    CDTDocumentRevision *retrieved = [datastore getDocumentWithId:id rev:rev error:&error];
+    
+    retrieved.body = (NSMutableDictionary*)body;
+    
+    CDTDocumentRevision *updated = [datastore updateDocumentFromRevision:retrieved
+                                                                   error:&error];
+    
+    NSDictionary *dict = @{ @"id" : updated.docId, @"rev" : updated.revId, @"body" : updated.body };
+    
+    if(!error)
+    {
+        NSArray *params = @[dict];
+        callback(@[[NSNull null], params]);
+    }
+    else{
+        callback(@[error.localizedDescription]);
+    }
+}
+
+
+RCT_EXPORT_METHOD(delete: (NSString *)id callback:(RCTResponseSenderBlock)callback)
+{
+    NSError *error = nil;
+    
+    CDTDocumentRevision *retrieved = [datastore getDocumentWithId:id error:&error];
+    
+    BOOL deleted = [datastore deleteDocumentFromRevision:retrieved
+                                                   error:&error];
+    if(!error)
+    {
+        NSArray *params = @[[NSNumber numberWithBool:deleted]];
+        callback(@[[NSNull null], params]);
+    }
+    else{
+        callback(@[error.localizedDescription]);
+    }
+}
 
 
 @end
