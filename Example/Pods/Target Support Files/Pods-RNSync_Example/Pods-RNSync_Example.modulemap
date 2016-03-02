@@ -1,0 +1,6 @@
+framework module Pods_RNSync_Example {
+  umbrella header "Pods-RNSync_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

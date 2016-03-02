@@ -1,0 +1,6 @@
+framework module RNSync {
+  umbrella header "RNSync-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,14 @@
+PODS:
+  - RNSync (0.1.0)
+
+DEPENDENCIES:
+  - RNSync (from `../`)
+
+EXTERNAL SOURCES:
+  RNSync:
+    :path: ../
+
+SPEC CHECKSUMS:
+  RNSync: 6a28ffcc79b97c3d9e30752e36aba9a54e4f35be
+
+COCOAPODS: 0.39.0
