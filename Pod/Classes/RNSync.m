@@ -26,7 +26,7 @@ RCT_EXPORT_MODULE();
 // TODO make sure this is the best way to create an objc singleton
 + (id)allocWithZone:(NSZone *)zone
 {
-    static ReactSync *sharedInstance = nil;
+    static RNSync *sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{ sharedInstance = [super allocWithZone:zone]; });
     return sharedInstance;
