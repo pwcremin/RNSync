@@ -83,6 +83,7 @@ rnsync.update(doc.id, function(error)
 {
   console.log(error);
 }
+```
 
 #### Replicate
 
