@@ -88,7 +88,7 @@ rnsync.update(doc.id, function(error)
 
 #### Replicate
 
-All of the CRUD functions only effect the local database.  To push your changes to the remote server you must replicate.
+All of the CRUD functions only affect the local database.  To push your changes to the remote server you must replicate.
 
 ```javascript
 rnsync.replicate(function(error)
