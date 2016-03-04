@@ -1,0 +1,911 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3f3104ea-5c34-4a5c-9c3a-45219287ddf7" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/index.ios.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Podfile" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Podfile.lock" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Attachments/CDTAttachment.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Attachments/CDTAttachment.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Attachments/CDTBlobData.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Attachments/CDTBlobData.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Attachments/CDTBlobReader.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Attachments/CDTBlobWriter.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Attachments/CDTDatastore+Attachments.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Attachments/CDTDatastore+Attachments.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTConflictResolver.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTDatastore+Conflicts.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTDatastore+Conflicts.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTDatastore+Internal.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTDatastore+Internal.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTDatastore.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTDatastore.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTDatastoreManager.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTDatastoreManager.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTDocumentRevision.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTDocumentRevision.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTFetchChanges.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTFetchChanges.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTLogging.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTLogging.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTMacros.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTMisc.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTMisc.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTReplicator/CDTAbstractReplication.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTReplicator/CDTAbstractReplication.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTReplicator/CDTPullReplication.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTReplicator/CDTPullReplication.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTReplicator/CDTPushReplication.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTReplicator/CDTPushReplication.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTReplicator/CDTReplicator.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTReplicator/CDTReplicator.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTReplicator/CDTReplicatorDelegate.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTReplicator/CDTReplicatorFactory.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTReplicator/CDTReplicatorFactory.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTSQLiteHelpers.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CDTSQLiteHelpers.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/CloudantSync.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/Attachments/CDTBlobEncryptedData+Internal.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/Attachments/CDTBlobEncryptedData.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/Attachments/CDTBlobEncryptedData.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/Attachments/CDTBlobEncryptedDataConstants.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/Attachments/CDTBlobHandleFactory.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/Attachments/CDTBlobHandleFactory.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/CDTDatastore+EncryptionKey.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/CDTDatastoreManager+EncryptionKey.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/CDTEncryptionKey.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/CDTEncryptionKey.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/CDTEncryptionKeyNilProvider.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/CDTEncryptionKeyNilProvider.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/CDTEncryptionKeyProvider.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/CDTEncryptionKeySimpleProvider.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/CDTEncryptionKeySimpleProvider.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/CloudantSyncEncryption.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/FMDatabase+EncryptionKey.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/FMDatabase+EncryptionKey.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/Keychain/CDTEncryptionKeychainConstants.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/Keychain/CDTEncryptionKeychainData.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/Keychain/CDTEncryptionKeychainData.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/Keychain/CDTEncryptionKeychainManager+Internal.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/Keychain/CDTEncryptionKeychainManager.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/Keychain/CDTEncryptionKeychainManager.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/Keychain/CDTEncryptionKeychainProvider+Internal.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/Keychain/CDTEncryptionKeychainProvider.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/Keychain/CDTEncryptionKeychainProvider.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/Keychain/CDTEncryptionKeychainStorage.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/Keychain/CDTEncryptionKeychainStorage.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/Keychain/CDTEncryptionKeychainUtils+AES.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/Keychain/CDTEncryptionKeychainUtils+AES.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/Keychain/CDTEncryptionKeychainUtils+PBKDF2.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/Keychain/CDTEncryptionKeychainUtils+PBKDF2.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/Keychain/CDTEncryptionKeychainUtils.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Encryption/Keychain/CDTEncryptionKeychainUtils.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/HTTP/CDTHTTPInterceptor.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/HTTP/CDTHTTPInterceptorContext.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/HTTP/CDTHTTPInterceptorContext.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/HTTP/CDTSessionCookieInterceptor.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/HTTP/CDTSessionCookieInterceptor.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/HTTP/CDTURLSession.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/HTTP/CDTURLSession.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/HTTP/CDTURLSessionTask.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/HTTP/CDTURLSessionTask.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Utils/CDTChangedArray.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Utils/CDTChangedArray.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Utils/CDTChangedDictionary.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Utils/CDTChangedDictionary.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Utils/CDTChangedObserver.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/Version.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/fmdb/FMDatabase+LongLong.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/fmdb/FMDatabase+LongLong.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/query/CDTDatastore+Query.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/query/CDTDatastore+Query.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/query/CDTQIndex.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/query/CDTQIndex.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/query/CDTQIndexCreator.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/query/CDTQIndexCreator.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/query/CDTQIndexManager.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/query/CDTQIndexManager.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/query/CDTQIndexUpdater.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/query/CDTQIndexUpdater.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/query/CDTQLogging.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/query/CDTQProjectedDocumentRevision.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/query/CDTQProjectedDocumentRevision.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/query/CDTQQueryConstants.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/query/CDTQQueryConstants.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/query/CDTQQueryExecutor.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/query/CDTQQueryExecutor.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/query/CDTQQuerySqlTranslator.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/query/CDTQQuerySqlTranslator.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/query/CDTQQueryValidator.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/query/CDTQQueryValidator.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/query/CDTQResultSet.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/query/CDTQResultSet.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/query/CDTQUnindexedMatcher.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/query/CDTQUnindexedMatcher.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/query/CDTQValueExtractor.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/query/CDTQValueExtractor.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/ChangeTracker/TDChangeTracker.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/ChangeTracker/TDChangeTracker.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/ChangeTracker/TDSocketChangeTracker.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/ChangeTracker/TDSocketChangeTracker.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/ChangeTracker/TDURLConnectionChangeTracker.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/ChangeTracker/TDURLConnectionChangeTracker.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDAuthorizer.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDAuthorizer.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDBase64.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDBase64.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDBatcher.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDBatcher.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDBlobStore+Internal.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDBlobStore.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDBlobStore.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDCanonicalJSON.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDCanonicalJSON.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDCollateJSON.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDCollateJSON.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDInternal.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDJSON.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDJSON.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDMisc.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDMisc.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDMultiStreamWriter.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDMultiStreamWriter.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDMultipartDocumentReader.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDMultipartDocumentReader.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDMultipartDownloader.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDMultipartDownloader.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDMultipartReader.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDMultipartReader.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDMultipartUploader.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDMultipartUploader.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDMultipartWriter.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDMultipartWriter.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDPuller.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDPuller.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDPusher.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDPusher.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDReachability.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDReachability.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDRemoteRequest.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDRemoteRequest.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDReplicator.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDReplicator.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDReplicatorManager.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDReplicatorManager.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDSequenceMap.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDSequenceMap.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDStatus.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TDStatus.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TD_Attachment.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TD_Attachment.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TD_Body.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TD_Body.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TD_Database+Attachments.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TD_Database+Attachments.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TD_Database+BlobFilenames.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TD_Database+BlobFilenames.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TD_Database+Conflicts.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TD_Database+Conflicts.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TD_Database+Insertion.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TD_Database+Insertion.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TD_Database+LocalDocs.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TD_Database+LocalDocs.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TD_Database+Replication.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TD_Database+Replication.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TD_Database.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TD_Database.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TD_DatabaseManager.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TD_DatabaseManager.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TD_Revision.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TD_Revision.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TD_View.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/common/touchdb/TD_View.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/vendor/MYUtilities/CollectionUtils.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/vendor/MYUtilities/CollectionUtils.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/vendor/MYUtilities/ConcurrentOperation.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/vendor/MYUtilities/ConcurrentOperation.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/vendor/MYUtilities/ExceptionUtils.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/vendor/MYUtilities/ExceptionUtils.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/vendor/MYUtilities/Logging.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/vendor/MYUtilities/Logging.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/vendor/MYUtilities/MYBlockUtils.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/vendor/MYUtilities/MYBlockUtils.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/vendor/MYUtilities/MYDynamicObject.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/vendor/MYUtilities/MYDynamicObject.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/vendor/MYUtilities/MYErrorUtils.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/vendor/MYUtilities/MYErrorUtils.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/vendor/MYUtilities/MYRegexUtils.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/vendor/MYUtilities/MYRegexUtils.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/vendor/MYUtilities/MYStreamUtils.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/vendor/MYUtilities/MYStreamUtils.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/vendor/MYUtilities/MYURLUtils.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/vendor/MYUtilities/MYURLUtils.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/vendor/MYUtilities/Target.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/vendor/MYUtilities/Target.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/vendor/MYUtilities/Test.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/vendor/MYUtilities/Test.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/vendor/google-toolbox-for-mac/GTMDefines.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/vendor/google-toolbox-for-mac/GTMNSData+zlib.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/Classes/vendor/google-toolbox-for-mac/GTMNSData+zlib.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/LICENSE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CDTDatastore/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CocoaLumberjack/Classes/CocoaLumberjack.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CocoaLumberjack/Classes/CocoaLumberjack.swift" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CocoaLumberjack/Classes/DDASLLogCapture.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CocoaLumberjack/Classes/DDASLLogCapture.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CocoaLumberjack/Classes/DDASLLogger.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CocoaLumberjack/Classes/DDASLLogger.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CocoaLumberjack/Classes/DDAbstractDatabaseLogger.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CocoaLumberjack/Classes/DDAbstractDatabaseLogger.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CocoaLumberjack/Classes/DDAssertMacros.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CocoaLumberjack/Classes/DDFileLogger.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CocoaLumberjack/Classes/DDFileLogger.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CocoaLumberjack/Classes/DDLegacyMacros.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CocoaLumberjack/Classes/DDLog+LOGV.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CocoaLumberjack/Classes/DDLog.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CocoaLumberjack/Classes/DDLog.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CocoaLumberjack/Classes/DDLogMacros.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CocoaLumberjack/Classes/DDTTYLogger.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CocoaLumberjack/Classes/DDTTYLogger.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CocoaLumberjack/Classes/Extensions/DDContextFilterLogFormatter.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CocoaLumberjack/Classes/Extensions/DDContextFilterLogFormatter.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CocoaLumberjack/Classes/Extensions/DDDispatchQueueLogFormatter.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CocoaLumberjack/Classes/Extensions/DDDispatchQueueLogFormatter.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CocoaLumberjack/Classes/Extensions/DDMultiFormatter.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CocoaLumberjack/Classes/Extensions/DDMultiFormatter.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CocoaLumberjack/Framework/Lumberjack/CocoaLumberjack.modulemap" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CocoaLumberjack/LICENSE.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/CocoaLumberjack/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/FMDB/README.markdown" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/FMDB/src/fmdb/FMDB.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/FMDB/src/fmdb/FMDatabase.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/FMDB/src/fmdb/FMDatabase.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/FMDB/src/fmdb/FMDatabaseAdditions.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/FMDB/src/fmdb/FMDatabaseAdditions.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/FMDB/src/fmdb/FMDatabasePool.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/FMDB/src/fmdb/FMDatabasePool.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/FMDB/src/fmdb/FMDatabaseQueue.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/FMDB/src/fmdb/FMDatabaseQueue.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/FMDB/src/fmdb/FMResultSet.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/FMDB/src/fmdb/FMResultSet.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTAbstractReplication.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTAttachment.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTBlobData.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTBlobEncryptedData+Internal.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTBlobEncryptedData.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTBlobEncryptedDataConstants.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTBlobHandleFactory.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTBlobReader.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTBlobWriter.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTChangedArray.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTChangedDictionary.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTChangedObserver.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTConflictResolver.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTDatastore+Attachments.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTDatastore+Conflicts.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTDatastore+EncryptionKey.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTDatastore+Internal.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTDatastore+Query.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTDatastore.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTDatastoreManager+EncryptionKey.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTDatastoreManager.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTDocumentRevision.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTEncryptionKey.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTEncryptionKeyNilProvider.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTEncryptionKeyProvider.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTEncryptionKeySimpleProvider.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTEncryptionKeychainConstants.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTEncryptionKeychainData.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTEncryptionKeychainManager+Internal.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTEncryptionKeychainManager.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTEncryptionKeychainProvider+Internal.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTEncryptionKeychainProvider.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTEncryptionKeychainStorage.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTEncryptionKeychainUtils+AES.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTEncryptionKeychainUtils+PBKDF2.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTEncryptionKeychainUtils.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTFetchChanges.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTHTTPInterceptor.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTHTTPInterceptorContext.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTLogging.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTMacros.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTMisc.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTPullReplication.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTPushReplication.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTQIndex.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTQIndexCreator.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTQIndexManager.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTQIndexUpdater.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTQLogging.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTQProjectedDocumentRevision.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTQQueryConstants.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTQQueryExecutor.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTQQuerySqlTranslator.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTQQueryValidator.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTQResultSet.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTQUnindexedMatcher.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTQValueExtractor.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTReplicator.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTReplicatorDelegate.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTReplicatorFactory.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTSQLiteHelpers.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTSessionCookieInterceptor.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTURLSession.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CDTURLSessionTask.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CloudantSync.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CloudantSyncEncryption.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/CollectionUtils.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/ConcurrentOperation.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/ExceptionUtils.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/FMDatabase+EncryptionKey.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/FMDatabase+LongLong.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/GTMDefines.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/GTMNSData+zlib.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/Logging.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/MYBlockUtils.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/MYDynamicObject.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/MYErrorUtils.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/MYRegexUtils.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/MYStreamUtils.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/MYURLUtils.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TDAuthorizer.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TDBase64.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TDBatcher.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TDBlobStore+Internal.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TDBlobStore.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TDCanonicalJSON.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TDChangeTracker.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TDCollateJSON.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TDInternal.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TDJSON.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TDMisc.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TDMultiStreamWriter.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TDMultipartDocumentReader.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TDMultipartDownloader.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TDMultipartReader.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TDMultipartUploader.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TDMultipartWriter.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TDPuller.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TDPusher.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TDReachability.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TDRemoteRequest.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TDReplicator.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TDReplicatorManager.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TDSequenceMap.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TDSocketChangeTracker.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TDStatus.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TDURLConnectionChangeTracker.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TD_Attachment.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TD_Body.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TD_Database+Attachments.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TD_Database+BlobFilenames.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TD_Database+Conflicts.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TD_Database+Insertion.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TD_Database+LocalDocs.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TD_Database+Replication.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TD_Database.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TD_DatabaseManager.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TD_Revision.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/TD_View.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/Target.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/Test.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CDTDatastore/Version.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CocoaLumberjack/CocoaLumberjack.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CocoaLumberjack/DDASLLogCapture.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CocoaLumberjack/DDASLLogger.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CocoaLumberjack/DDAbstractDatabaseLogger.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CocoaLumberjack/DDAssertMacros.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CocoaLumberjack/DDContextFilterLogFormatter.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CocoaLumberjack/DDDispatchQueueLogFormatter.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CocoaLumberjack/DDFileLogger.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CocoaLumberjack/DDLegacyMacros.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CocoaLumberjack/DDLog+LOGV.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CocoaLumberjack/DDLog.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CocoaLumberjack/DDLogMacros.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CocoaLumberjack/DDMultiFormatter.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/CocoaLumberjack/DDTTYLogger.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/FMDB/FMDB.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/FMDB/FMDatabase.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/FMDB/FMDatabaseAdditions.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/FMDB/FMDatabasePool.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/FMDB/FMDatabaseQueue.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Private/FMDB/FMResultSet.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTAbstractReplication.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTAttachment.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTBlobData.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTBlobEncryptedData+Internal.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTBlobEncryptedData.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTBlobEncryptedDataConstants.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTBlobHandleFactory.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTBlobReader.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTBlobWriter.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTChangedArray.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTChangedDictionary.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTChangedObserver.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTConflictResolver.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTDatastore+Attachments.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTDatastore+Conflicts.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTDatastore+EncryptionKey.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTDatastore+Internal.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTDatastore+Query.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTDatastore.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTDatastoreManager+EncryptionKey.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTDatastoreManager.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTDocumentRevision.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTEncryptionKey.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTEncryptionKeyNilProvider.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTEncryptionKeyProvider.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTEncryptionKeySimpleProvider.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTEncryptionKeychainConstants.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTEncryptionKeychainData.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTEncryptionKeychainManager+Internal.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTEncryptionKeychainManager.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTEncryptionKeychainProvider+Internal.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTEncryptionKeychainProvider.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTEncryptionKeychainStorage.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTEncryptionKeychainUtils+AES.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTEncryptionKeychainUtils+PBKDF2.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTEncryptionKeychainUtils.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTFetchChanges.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTHTTPInterceptor.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTHTTPInterceptorContext.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTLogging.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTMacros.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTMisc.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTPullReplication.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTPushReplication.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTQIndex.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTQIndexCreator.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTQIndexManager.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTQIndexUpdater.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTQLogging.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTQProjectedDocumentRevision.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTQQueryConstants.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTQQueryExecutor.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTQQuerySqlTranslator.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTQQueryValidator.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTQResultSet.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTQUnindexedMatcher.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTQValueExtractor.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTReplicator.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTReplicatorDelegate.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTReplicatorFactory.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTSQLiteHelpers.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTSessionCookieInterceptor.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTURLSession.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CDTURLSessionTask.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CloudantSync.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CloudantSyncEncryption.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/CollectionUtils.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/ConcurrentOperation.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/ExceptionUtils.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/FMDatabase+EncryptionKey.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/FMDatabase+LongLong.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/GTMDefines.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/GTMNSData+zlib.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/Logging.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/MYBlockUtils.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/MYDynamicObject.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/MYErrorUtils.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/MYRegexUtils.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/MYStreamUtils.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/MYURLUtils.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TDAuthorizer.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TDBase64.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TDBatcher.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TDBlobStore+Internal.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TDBlobStore.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TDCanonicalJSON.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TDChangeTracker.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TDCollateJSON.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TDInternal.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TDJSON.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TDMisc.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TDMultiStreamWriter.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TDMultipartDocumentReader.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TDMultipartDownloader.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TDMultipartReader.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TDMultipartUploader.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TDMultipartWriter.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TDPuller.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TDPusher.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TDReachability.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TDRemoteRequest.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TDReplicator.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TDReplicatorManager.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TDSequenceMap.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TDSocketChangeTracker.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TDStatus.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TDURLConnectionChangeTracker.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TD_Attachment.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TD_Body.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TD_Database+Attachments.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TD_Database+BlobFilenames.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TD_Database+Conflicts.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TD_Database+Insertion.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TD_Database+LocalDocs.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TD_Database+Replication.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TD_Database.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TD_DatabaseManager.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TD_Revision.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/TD_View.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/Target.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/Test.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CDTDatastore/Version.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CocoaLumberjack/CocoaLumberjack.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CocoaLumberjack/DDASLLogCapture.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CocoaLumberjack/DDASLLogger.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CocoaLumberjack/DDAbstractDatabaseLogger.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CocoaLumberjack/DDAssertMacros.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CocoaLumberjack/DDContextFilterLogFormatter.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CocoaLumberjack/DDDispatchQueueLogFormatter.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CocoaLumberjack/DDFileLogger.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CocoaLumberjack/DDLegacyMacros.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CocoaLumberjack/DDLog+LOGV.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CocoaLumberjack/DDLog.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CocoaLumberjack/DDLogMacros.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CocoaLumberjack/DDMultiFormatter.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/CocoaLumberjack/DDTTYLogger.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/FMDB/FMDB.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/FMDB/FMDatabase.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/FMDB/FMDatabaseAdditions.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/FMDB/FMDatabasePool.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/FMDB/FMDatabaseQueue.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Headers/Public/FMDB/FMResultSet.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Manifest.lock" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Pods.xcodeproj/project.pbxproj" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Target Support Files/CDTDatastore/CDTDatastore-dummy.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Target Support Files/CDTDatastore/CDTDatastore-prefix.pch" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Target Support Files/CDTDatastore/CDTDatastore.xcconfig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Target Support Files/CocoaLumberjack/CocoaLumberjack-dummy.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Target Support Files/CocoaLumberjack/CocoaLumberjack.xcconfig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Target Support Files/FMDB/FMDB-dummy.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Target Support Files/FMDB/FMDB-prefix.pch" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Target Support Files/FMDB/FMDB.xcconfig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Target Support Files/Pods-reactCloudantSync/Pods-reactCloudantSync-acknowledgements.markdown" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Target Support Files/Pods-reactCloudantSync/Pods-reactCloudantSync-acknowledgements.plist" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Target Support Files/Pods-reactCloudantSync/Pods-reactCloudantSync-dummy.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Target Support Files/Pods-reactCloudantSync/Pods-reactCloudantSync.debug.xcconfig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/Pods/Target Support Files/Pods-reactCloudantSync/Pods-reactCloudantSync.release.xcconfig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/RNSync.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/RNSync.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/ReactPulse.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/ReactPulse.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/reactCloudantSync.xcodeproj/project.pbxproj" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/reactCloudantSync.xcworkspace/contents.xcworkspacedata" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/reactCloudantSync/AppDelegate.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/reactCloudantSync/AppDelegate.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/reactCloudantSync/Base.lproj/LaunchScreen.xib" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/reactCloudantSync/main.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/ios/reactCloudantSyncTests/reactCloudantSyncTests.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Example/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/index.js" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Podfile" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Podfile.lock" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Pods/Local Podspecs/RNSync.podspec.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Pods/Manifest.lock" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Pods/Pods.xcodeproj/project.pbxproj" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Pods/Pods.xcodeproj/xcshareddata/xcschemes/RNSync.xcscheme" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Pods/Target Support Files/Pods-RNSync_Example/Info.plist" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Pods/Target Support Files/Pods-RNSync_Example/Pods-RNSync_Example-acknowledgements.plist" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Pods/Target Support Files/Pods-RNSync_Example/Pods-RNSync_Example-dummy.m" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Pods/Target Support Files/Pods-RNSync_Example/Pods-RNSync_Example-frameworks.sh" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Pods/Target Support Files/Pods-RNSync_Example/Pods-RNSync_Example-resources.sh" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Pods/Target Support Files/Pods-RNSync_Example/Pods-RNSync_Example-umbrella.h" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Pods/Target Support Files/Pods-RNSync_Example/Pods-RNSync_Example.debug.xcconfig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Pods/Target Support Files/Pods-RNSync_Example/Pods-RNSync_Example.modulemap" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Pods/Target Support Files/Pods-RNSync_Example/Pods-RNSync_Example.release.xcconfig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Pods/Target Support Files/Pods-RNSync_Tests/Info.plist" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Pods/Target Support Files/Pods-RNSync_Tests/Pods-RNSync_Tests-acknowledgements.markdown" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Pods/Target Support Files/Pods-RNSync_Tests/Pods-RNSync_Tests-acknowledgements.plist" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Pods/Target Support Files/Pods-RNSync_Tests/Pods-RNSync_Tests-dummy.m" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Pods/Target Support Files/Pods-RNSync_Tests/Pods-RNSync_Tests-umbrella.h" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Pods/Target Support Files/Pods-RNSync_Tests/Pods-RNSync_Tests.debug.xcconfig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Pods/Target Support Files/Pods-RNSync_Tests/Pods-RNSync_Tests.modulemap" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Pods/Target Support Files/Pods-RNSync_Tests/Pods-RNSync_Tests.release.xcconfig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Pods/Target Support Files/RNSync/Info.plist" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Pods/Target Support Files/RNSync/RNSync-dummy.m" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Pods/Target Support Files/RNSync/RNSync-umbrella.h" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Pods/Target Support Files/RNSync/RNSync.modulemap" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Pods/Target Support Files/RNSync/RNSync.xcconfig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/RNSync.xcodeproj/project.pbxproj" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/RNSync.xcodeproj/project.xcworkspace/contents.xcworkspacedata" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/RNSync/Images.xcassets/LaunchImage.launchimage/Contents.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/RNSync/Main.storyboard" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/RNSync/RNSync-Prefix.pch" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/RNSync/RNSyncAppDelegate.h" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/RNSync/RNSyncAppDelegate.m" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/RNSync/RNSyncViewController.h" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/RNSync/RNSyncViewController.m" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/RNSync/en.lproj/InfoPlist.strings" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/RNSync/main.m" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Tests/Tests-Prefix.pch" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Tests/Tests.m" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/Tests/en.lproj/InfoPlist.strings" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Example/ios/RNSync.xcworkspace/contents.xcworkspacedata" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Example/Pods/Pods.xcodeproj/project.xcworkspace/contents.xcworkspacedata" afterPath="$PROJECT_DIR$/Example/ios/reactCloudantSync.xcodeproj/project.xcworkspace/contents.xcworkspacedata" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Example/Pods/Target Support Files/Pods-RNSync_Example/Pods-RNSync_Example-acknowledgements.markdown" afterPath="$PROJECT_DIR$/Example/ios/Pods/FMDB/LICENSE.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Example/Pods/Target Support Files/Pods-RNSync_Tests/Pods-RNSync_Tests-frameworks.sh" afterPath="$PROJECT_DIR$/Example/ios/Pods/Target Support Files/Pods-reactCloudantSync/Pods-reactCloudantSync-frameworks.sh" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Example/Pods/Target Support Files/Pods-RNSync_Tests/Pods-RNSync_Tests-resources.sh" afterPath="$PROJECT_DIR$/Example/ios/Pods/Target Support Files/Pods-reactCloudantSync/Pods-reactCloudantSync-resources.sh" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Example/Pods/Target Support Files/RNSync/RNSync-prefix.pch" afterPath="$PROJECT_DIR$/Example/ios/Pods/Target Support Files/CocoaLumberjack/CocoaLumberjack-prefix.pch" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Example/RNSync.xcodeproj/xcshareddata/xcschemes/RNSync-Example.xcscheme" afterPath="$PROJECT_DIR$/Example/ios/reactCloudantSync.xcodeproj/xcshareddata/xcschemes/reactCloudantSync.xcscheme" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Example/RNSync/Images.xcassets/AppIcon.appiconset/Contents.json" afterPath="$PROJECT_DIR$/Example/ios/reactCloudantSync/Images.xcassets/AppIcon.appiconset/Contents.json" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Example/RNSync/RNSync-Info.plist" afterPath="$PROJECT_DIR$/Example/ios/reactCloudantSync/Info.plist" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Example/Tests/Tests-Info.plist" afterPath="$PROJECT_DIR$/Example/ios/reactCloudantSyncTests/Info.plist" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RNSync.podspec" afterPath="$PROJECT_DIR$/RNSync.podspec" />
+    </list>
+    <ignored path="RNSync.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="RNSync" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="RNSync.podspec" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RNSync.podspec">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="25" column="67" selection-start-line="25" selection-start-column="67" selection-end-line="25" selection-end-column="67" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6315789">
+              <caret line="24" column="2" selection-start-line="24" selection-start-column="2" selection-end-line="24" selection-end-column="2" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="React.podspec" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Example/node_modules/react-native/React.podspec">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/RNSync.podspec" />
+        <option value="$PROJECT_DIR$/index.js" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsBuildToolPackageJson" detection-done="true" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="220" />
+    <option name="y" value="23" />
+    <option name="width" value="1248" />
+    <option name="height" value="792" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RNSync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RNSync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RNSync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../mqttweb" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="js-jscs-nodeInterpreter" value="$USER_HOME$/.nvm/versions/node/v4.2.2/bin/node" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
+    <configuration default="true" type="DartTestRunConfigurationType" factoryName="Dart Test">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
+      <method />
+    </configuration>
+    <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" value="" />
+      <option name="executablePath" />
+      <option name="filePath" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run-script" />
+      <scripts />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
+      <node-options />
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui>bdd</ui>
+      <extra-mocha-options />
+      <test-kind>DIRECTORY</test-kind>
+      <test-directory />
+      <recursive>false</recursive>
+      <method />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3f3104ea-5c34-4a5c-9c3a-45219287ddf7" name="Default" comment="" />
+      <created>1457026389399</created>
+      <option name="number" value="Default" />
+      <updated>1457026389399</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="220" y="23" width="1248" height="792" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24938875" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/RNSync.podspec">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="67" selection-start-line="25" selection-start-column="67" selection-end-line="25" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Example/node_modules/react-native/React.podspec">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6315789">
+          <caret line="24" column="2" selection-start-line="24" selection-start-column="2" selection-end-line="24" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

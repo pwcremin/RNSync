@@ -1,0 +1,24 @@
+{
+  "name": "rnsync",
+  "version": "0.0.1",
+  "description": "React Native wrapper for Cloudant Sync",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pwcremin/RNSync.git"
+  },
+  "keywords": [
+    "react-component",
+    "react-native",
+    "ios"
+  ],
+  "author": "Patrick Cremin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pwcremin/RNSync/issues"
+  },
+  "homepage": "https://github.com/pwcremin/RNSync#readme"
+}
