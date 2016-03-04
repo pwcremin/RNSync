@@ -32,49 +32,6 @@ RCT_EXPORT_MODULE();
     return sharedInstance;
 }
 
-- (id)init {
-    self = [super init];
-    
-    if (self)
-    {
-        
-        // Create a CDTDatastoreManager using application internal storage path
-        NSError *outError = nil;
-        NSFileManager *fileManager= [NSFileManager defaultManager];
-        
-        NSURL *documentsDir = [[fileManager URLsForDirectory:NSDocumentDirectory
-                                                   inDomains:NSUserDomainMask] lastObject];
-        NSURL *storeURL = [documentsDir URLByAppendingPathComponent:@"cloudant-sync-datastore"];
-        NSString *path = [storeURL path];
-        
-        manager = [[CDTDatastoreManager alloc] initWithDirectory:path
-                                                           error:&outError];
-        
-        datastore = [manager datastoreNamed:@"my_datastore"
-                                      error:&outError];
-        
-        // Create and start the replicator -- -start is essential!
-        CDTReplicatorFactory *replicatorFactory =
-        [[CDTReplicatorFactory alloc] initWithDatastoreManager:manager];
-        
-        //NSString *s = @"https://apikey:apipassword@username.cloudant.com/my_database";
-        NSString *s = @"https://6d5bfc03-0c54-41dc-b2e6-4dd0cc3f01c7-bluemix:084f9523e8996eb6bc9f036a495a97a1fc13bc253494c6787bf4a2f74614db7b@6d5bfc03-0c54-41dc-b2e6-4dd0cc3f01c7-bluemix.cloudant.com/test";
-        
-        NSURL *remoteDatabaseURL = [NSURL URLWithString:s];
-        //  CDTDatastore *datastore = [manager datastoreNamed:@"my_datastore"];
-        
-        // Replicate from the local to remote database
-        CDTPushReplication *pushReplication = [CDTPushReplication replicationWithSource:datastore
-                                                                                 target:remoteDatabaseURL];
-        NSError *error;
-        replicator = [replicatorFactory oneWay:pushReplication error:&error];
-        
-        replicator.delegate = self;
-    }
-    
-    return self;
-}
-
 /**
  * <p>Called when a state transition to COMPLETE or STOPPED is
  * completed.</p>
@@ -109,12 +66,60 @@ RCT_EXPORT_MODULE();
  * @param replicator the replicator issuing the event.
  * @param info information about the error that occurred.
  */
-- (void)replicatorDidError:(CDTReplicator *)replicator info:(NSError *)info
+- (void)replicatorDidError:(CDTReplicator *)replicator info:(NSError *)error
 {
     if(replicatorDidErrorCallback)
     {
-        replicatorDidErrorCallback(@[[NSNull null]]);
+        replicatorDidErrorCallback(@[[NSNumber numberWithLong:error.code]]);
     }
+}
+
+RCT_EXPORT_METHOD(init: (NSString *)databaseUrl callback:(RCTResponseSenderBlock)callback)
+{
+    
+    
+    // Create a CDTDatastoreManager using application internal storage path
+    NSError *outError = nil;
+    NSFileManager *fileManager= [NSFileManager defaultManager];
+    
+    NSURL *documentsDir = [[fileManager URLsForDirectory:NSDocumentDirectory
+                                               inDomains:NSUserDomainMask] lastObject];
+    NSURL *storeURL = [documentsDir URLByAppendingPathComponent:@"cloudant-sync-datastore"];
+    NSString *path = [storeURL path];
+    
+    manager = [[CDTDatastoreManager alloc] initWithDirectory:path
+                                                       error:&outError];
+    
+    datastore = [manager datastoreNamed:@"my_datastore"
+                                  error:&outError];
+    
+    // Create and start the replicator -- -start is essential!
+    CDTReplicatorFactory *replicatorFactory =
+    [[CDTReplicatorFactory alloc] initWithDatastoreManager:manager];
+    
+    //NSString *s = @"https://apikey:apipassword@username.cloudant.com/my_database";
+    //NSString *s = @"https://ce589353-511f-447e-921b-6235fec33ae9-bluemix:2d076e2e5760e09a9ca64e9b1f42341cc336457fb926dff83436a61041e8a25e@ce589353-511f-447e-921b-6235fec33ae9-bluemix.cloudant.com/users";
+    
+    NSURL *remoteDatabaseURL = [NSURL URLWithString:databaseUrl];
+    //  CDTDatastore *datastore = [manager datastoreNamed:@"my_datastore"];
+    
+    // Replicate from the local to remote database
+    CDTPushReplication *pushReplication = [CDTPushReplication replicationWithSource:datastore
+                                                                             target:remoteDatabaseURL];
+    NSError *error;
+    replicator = [replicatorFactory oneWay:pushReplication error:&error];
+    
+    replicator.delegate = self;
+    
+    if(error)
+    {
+        callback(@[[NSNumber numberWithLong:error.code]]);
+    }
+    else
+    {
+        callback(@[[NSNull null]]);
+    }
+    
 }
 
 RCT_EXPORT_METHOD(replicate: (RCTResponseSenderBlock)successCallback errorCallback: (RCTResponseSenderBlock)errrorCallback)
@@ -122,9 +127,8 @@ RCT_EXPORT_METHOD(replicate: (RCTResponseSenderBlock)successCallback errorCallba
     replicatorDidCompleteCallback = successCallback;
     replicatorDidErrorCallback = errrorCallback;
     
-    //check error
     NSError *error;
-    // Start the replicator
+    
     [replicator startWithError: &error];
 }
 
@@ -138,12 +142,21 @@ RCT_EXPORT_METHOD(setReplicatorDidErrorCallback: (RCTResponseSenderBlock)callbac
     replicatorDidErrorCallback = callback;
 }
 
-RCT_EXPORT_METHOD(create: body callback:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(create: body id:(NSString*)id callback:(RCTResponseSenderBlock)callback)
 {
     NSError *error = nil;
     
+    CDTDocumentRevision *rev;
+    
     // Create a document
-    CDTDocumentRevision *rev = [CDTDocumentRevision revision];
+    if(id)
+    {
+        rev = [CDTDocumentRevision revisionWithDocId: id];
+    }
+    else{
+        rev = [CDTDocumentRevision revision];
+    }
+    
     
     // Use [CDTDocumentRevision revision] to get an ID generated for you on saving
     //  rev.body = [@{
@@ -151,6 +164,11 @@ RCT_EXPORT_METHOD(create: body callback:(RCTResponseSenderBlock)callback)
     //                @"completed": @NO,
     //                @"type": @"com.cloudant.sync.example.task"
     //                } mutableCopy];
+    
+    if(!body)
+    {
+        body = @{};
+    }
     
     rev.body = body;
     
@@ -164,15 +182,15 @@ RCT_EXPORT_METHOD(create: body callback:(RCTResponseSenderBlock)callback)
     // Save the document to the database
     CDTDocumentRevision *revision = [datastore createDocumentFromRevision:rev error:&error];
     
-    NSDictionary *dict = @{ @"id" : revision.docId, @"rev" : revision.revId, @"body" : revision.body };
-    
     if(!error)
     {
+        NSDictionary *dict = @{ @"id" : revision.docId, @"rev" : revision.revId, @"body" : revision.body };
+        
         NSArray *params = @[dict];
         callback(@[[NSNull null], params]);
     }
     else{
-        callback(@[error.localizedDescription]);
+        callback(@[[NSNumber numberWithLong:error.code]]);
     }
     
 }
@@ -183,15 +201,17 @@ RCT_EXPORT_METHOD(retrieve: (NSString *)id callback:(RCTResponseSenderBlock)call
     NSError *error = nil;
     
     // Read a document
-    CDTDocumentRevision *retrieved = [datastore getDocumentWithId:id error:&error];
+    CDTDocumentRevision *revision = [datastore getDocumentWithId:id error:&error];
     
     if(!error)
     {
-        NSArray *params = @[retrieved.docId, retrieved.revId, retrieved.body];
+        NSDictionary *dict = @{ @"id" : revision.docId, @"rev" : revision.revId, @"body" : revision.body };
+        
+        NSArray *params = @[dict];
         callback(@[[NSNull null], params]);
     }
     else{
-        callback(@[error.localizedDescription]);
+        callback(@[[NSNumber numberWithLong:error.code]]);
     }
 }
 
@@ -215,7 +235,7 @@ RCT_EXPORT_METHOD(update: (NSString *)id rev:(NSString *)rev  body:(NSDictionary
         callback(@[[NSNull null], params]);
     }
     else{
-        callback(@[error.localizedDescription]);
+        callback(@[[NSNumber numberWithLong:error.code]]);
     }
 }
 
@@ -234,7 +254,7 @@ RCT_EXPORT_METHOD(delete: (NSString *)id callback:(RCTResponseSenderBlock)callba
         callback(@[[NSNull null], params]);
     }
     else{
-        callback(@[error.localizedDescription]);
+        callback(@[[NSNumber numberWithLong:error.code]]);
     }
 }
 
