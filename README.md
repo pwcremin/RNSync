@@ -6,13 +6,20 @@
 [![Platform](https://img.shields.io/cocoapods/p/RNSync.svg?style=flat)](http://cocoapods.org/pods/RNSync)
 
 ## Installation
-Edit your Podfil
+
+Install with npm
+```ruby
+npm install --save rnsync
+```
+
+Edit your Podfile
 ```ruby
 pod 'rnsync', :path => '../node_modules/rnsync'
 ```
 
+Pod install
 ```ruby
-npm install --save rnsync
+pod install
 pod 
 ```
 
