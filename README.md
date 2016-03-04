@@ -5,19 +5,15 @@
 [![License](https://img.shields.io/cocoapods/l/RNSync.svg?style=flat)](http://cocoapods.org/pods/RNSync)
 [![Platform](https://img.shields.io/cocoapods/p/RNSync.svg?style=flat)](http://cocoapods.org/pods/RNSync)
 
-## Usage
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
-
 ## Installation
-
-RNSync is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+Edit your Podfil
+```ruby
+pod 'rnsync', :path => '../node_modules/rnsync'
+```
 
 ```ruby
-pod "RNSync"
+npm install --save rnsync
+pod 
 ```
 
 ## Author
