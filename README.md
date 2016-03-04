@@ -57,6 +57,7 @@ rnsync.create(object, id, function(error, docs)
 ```javascript
 
 var id = "whatever";
+
 rnsync.retrieve(id, function(error, docs)
 {
   console.log(JSON.stringify(docs[0].body));
