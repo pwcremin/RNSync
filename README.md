@@ -1,9 +1,5 @@
 # RNSync
 
-[![Version](https://img.shields.io/cocoapods/v/RNSync.svg?style=flat)](http://cocoapods.org/pods/RNSync)
-[![License](https://img.shields.io/cocoapods/l/RNSync.svg?style=flat)](http://cocoapods.org/pods/RNSync)
-[![Platform](https://img.shields.io/cocoapods/p/RNSync.svg?style=flat)](http://cocoapods.org/pods/RNSync)
-
 ## About
 
 RNSync is a React Native module that allows you to intereact with your Cloudant or CouchDB database locally on the mobile device and replicate to the remote database when needed.
