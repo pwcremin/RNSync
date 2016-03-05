@@ -107,7 +107,7 @@ rnsync.addAttachment('user' /*id*/, 'somepic'/*name*/, response.uri.replace('fil
 All of the CRUD functions only affect the local database.  To push your changes to the remote server you must replicate.
 
 ```javascript
-rnsync.replicate(onSuccessFunc, onFailFunc);
+rnsync.replicate(onSuccessCallback, onFailCallback);
 ```
 
 ## Author
