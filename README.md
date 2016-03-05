@@ -96,7 +96,7 @@ rnsync.update(doc.id, function(error)
 Add files/Binaries.  Cloudant warns against adding too many are too large of files, or you may have performance degredation, but doesn't quantify what that means.
 
 ```javascript
-rnsync.addAttachment('user' /*id*/, 'somepic'/*name*/, response.uri.replace('file://', '') /*uri*/, 'image/jpeg' /*type*/, function(error)
+rnsync.addAttachment('user' /*id*/, 'somepic'/*name*/, response.uri.replace('file://', '') /*uri*/, 'image/jpeg' /*type*/, function(error, docs)
 {
   console.log(error);
 });
