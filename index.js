@@ -1,10 +1,13 @@
 var RNSync = require( 'react-native' ).NativeModules.RNSync;
 
+var noop = function(){};
 
 var Sync = {
 
     init: function ( cloudantServerUrl, databaseName, callback )
     {
+        callback = callback || noop;
+
         var databaseUrl = cloudantServerUrl + '/' + databaseName;
 
         return fetch( databaseUrl, {
@@ -18,27 +21,33 @@ var Sync = {
                 }
                 else
                 {
-                    callback( 'error: (' + response.status + ') ' + response._bodyInit );
+                    callback && callback( 'error: (' + response.status + ') ' + response._bodyInit );
                 }
             } )
             .catch( ( error ) =>
             {
-                callback( error );
+                callback && callback( error );
             } )
     },
 
     create: function ( body, id, callback )
     {
+        callback = callback || noop;
+
         RNSync.create( body, id, callback );
     },
 
     retrieve: function ( id, callback )
     {
+        callback = callback || noop;
+
         RNSync.retrieve( id, callback );
     },
 
     findOrCreate: function ( id, callback )
     {
+        callback = callback || noop;
+
         RNSync.retrieve( id, function ( err, doc )
         {
             if ( err === 404 )
@@ -54,18 +63,33 @@ var Sync = {
 
     update: function ( id, rev, body, callback )
     {
+        callback = callback || noop;
+
         RNSync.update( id, rev, body, callback );
     },
 
     delete: function ( id, callback )
     {
+        callback = callback || noop;
+
         RNSync.delete( id, callback );
     },
 
     replicate: function ( successCallback, errorCallback )
     {
+        successCallback = successCallback || noop;
+        errorCallback = errorCallback || noop;
+
         RNSync.replicate( successCallback, errorCallback );
+    },
+
+    addAttachment: function ( id, name, path, type, callback )
+    {
+        callback = callback || noop;
+
+        RNSync.addAttachment( id, name, path, type, callback );
     }
+
 };
 
 module.exports = Sync;

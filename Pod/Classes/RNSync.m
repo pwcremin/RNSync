@@ -76,8 +76,6 @@ RCT_EXPORT_MODULE();
 
 RCT_EXPORT_METHOD(init: (NSString *)databaseUrl callback:(RCTResponseSenderBlock)callback)
 {
-    
-    
     // Create a CDTDatastoreManager using application internal storage path
     NSError *outError = nil;
     NSFileManager *fileManager= [NSFileManager defaultManager];
@@ -87,21 +85,15 @@ RCT_EXPORT_METHOD(init: (NSString *)databaseUrl callback:(RCTResponseSenderBlock
     NSURL *storeURL = [documentsDir URLByAppendingPathComponent:@"cloudant-sync-datastore"];
     NSString *path = [storeURL path];
     
-    manager = [[CDTDatastoreManager alloc] initWithDirectory:path
-                                                       error:&outError];
+    manager = [[CDTDatastoreManager alloc] initWithDirectory:path error:&outError];
     
-    datastore = [manager datastoreNamed:@"my_datastore"
-                                  error:&outError];
+    datastore = [manager datastoreNamed:@"my_datastore" error:&outError];
     
     // Create and start the replicator -- -start is essential!
     CDTReplicatorFactory *replicatorFactory =
     [[CDTReplicatorFactory alloc] initWithDatastoreManager:manager];
     
-    //NSString *s = @"https://apikey:apipassword@username.cloudant.com/my_database";
-    //NSString *s = @"https://ce589353-511f-447e-921b-6235fec33ae9-bluemix:2d076e2e5760e09a9ca64e9b1f42341cc336457fb926dff83436a61041e8a25e@ce589353-511f-447e-921b-6235fec33ae9-bluemix.cloudant.com/users";
-    
     NSURL *remoteDatabaseURL = [NSURL URLWithString:databaseUrl];
-    //  CDTDatastore *datastore = [manager datastoreNamed:@"my_datastore"];
     
     // Replicate from the local to remote database
     CDTPushReplication *pushReplication = [CDTPushReplication replicationWithSource:datastore
@@ -119,7 +111,6 @@ RCT_EXPORT_METHOD(init: (NSString *)databaseUrl callback:(RCTResponseSenderBlock
     {
         callback(@[[NSNull null]]);
     }
-    
 }
 
 RCT_EXPORT_METHOD(replicate: (RCTResponseSenderBlock)successCallback errorCallback: (RCTResponseSenderBlock)errrorCallback)
@@ -172,12 +163,6 @@ RCT_EXPORT_METHOD(create: body id:(NSString*)id callback:(RCTResponseSenderBlock
     
     rev.body = body;
     
-    // Add an attachment -- binary data like a JPEG
-    //CDTUnsavedFileAttachment *att = [[CDTUnsavedFileAttachment alloc]
-    //                                  initWithPath:@"/path/to/image.jpg"
-    //                                  name:@"cute_cat.jpg"
-    //                                 type:@"image/jpeg"];
-    // rev.attachments[att.name] = att;
     
     // Save the document to the database
     CDTDocumentRevision *revision = [datastore createDocumentFromRevision:rev error:&error];
@@ -195,6 +180,39 @@ RCT_EXPORT_METHOD(create: body id:(NSString*)id callback:(RCTResponseSenderBlock
     
 }
 
+RCT_EXPORT_METHOD(addAttachment: id name:(NSString*)name path:(NSString*)path type:(NSString*)type callback:(RCTResponseSenderBlock)callback)
+{
+    NSError *error = nil;
+    
+    CDTDocumentRevision *revision = [datastore getDocumentWithId:id error:&error];
+    
+    if(error)
+    {
+        callback(@[[NSNumber numberWithLong:error.code]]);
+        return;
+    }
+    
+    // Add an attachment -- binary data like a JPEG
+    CDTUnsavedFileAttachment *att = [[CDTUnsavedFileAttachment alloc]
+                                     initWithPath:path   //@"/path/to/image.jpg"
+                                     name:name           //@"cute_cat.jpg"
+                                     type:type];           //@"image/jpeg"];
+    
+    revision.attachments[att.name] = att;
+    
+    CDTDocumentRevision *updated = [datastore updateDocumentFromRevision:revision error:&error];
+    
+    NSDictionary *dict = @{ @"id" : updated.docId, @"rev" : updated.revId, @"body" : updated.body };
+    
+    if(!error)
+    {
+        NSArray *params = @[dict];
+        callback(@[[NSNull null], params]);
+    }
+    else{
+        callback(@[[NSNumber numberWithLong:error.code]]);
+    }
+}
 
 RCT_EXPORT_METHOD(retrieve: (NSString *)id callback:(RCTResponseSenderBlock)callback)
 {
