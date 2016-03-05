@@ -113,4 +113,4 @@ Patrick Cremin, pwcremin@gmail.com
 
 RNSync is available under the MIT license. See the LICENSE file for more info.
 
-[![Analytics](https://ga-beacon.appspot.com/UA-67878787-2/rnsync/readme)](https://github.com/pwcremin/rnsync)
+[![Analytics](https://ga-beacon.appspot.com/UA-67878787-2/RNSync/readme)](https://github.com/igrigorik/ga-beacon)
