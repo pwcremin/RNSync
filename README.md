@@ -31,8 +31,8 @@ pod install
 ```javascript
 var rnsync = require('rnsync');
 
-// connect to your cloudant server
-var dbUrl = "https://xxxxx";
+// connect to your cloudant or couchDB database
+var dbUrl = "https://user:pass@xxxxx";
 var dbName = "name_xxxx";
 
 rnsync.init(dbUrl, dbName, function(error)
@@ -69,6 +69,8 @@ rnsync.retrieve(id, function(error, docs)
 
 #### Update
 
+When doing an update to a doc, you must include the revision.
+
 ```javascript
 
 doc.body.somechange = "hi mom";
@@ -87,6 +89,17 @@ rnsync.update(doc.id, function(error)
 {
   console.log(error);
 }
+```
+
+#### Add Attachment
+
+Add files/Binaries.  Cloudant warns against adding too many are too large of files, or you may have performance degredation, but doesn't quantify what that means.
+
+```javascript
+rnsync.addAttachment('user' /*id*/, 'somepic'/*name*/, response.uri.replace('file://', '') /*uri*/, 'image/jpeg' /*type*/, function(error)
+{
+  console.log(error);
+});
 ```
 
 #### Replicate
