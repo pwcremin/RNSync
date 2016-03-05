@@ -31,8 +31,8 @@ pod install
 ```javascript
 var rnsync = require('rnsync');
 
-// connect to your cloudant server
-var dbUrl = "https://xxxxx";
+// connect to your cloudant or couchDB database
+var dbUrl = "https://user:pass@xxxxx";
 var dbName = "name_xxxx";
 
 rnsync.init(dbUrl, dbName, function(error)
