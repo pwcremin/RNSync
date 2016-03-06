@@ -93,10 +93,10 @@ rnsync.update(doc.id, function(error)
 
 #### Add Attachment
 
-Add files/Binaries.  Cloudant warns against adding too many are too large of files, or you may have performance degredation, but doesn't quantify what that means.
+Add files/binaries.
 
 ```javascript
-rnsync.addAttachment('user' /*id*/, 'somepic'/*name*/, response.uri.replace('file://', '') /*uri*/, 'image/jpeg' /*type*/, function(error)
+rnsync.addAttachment('user' /*id*/, 'somepic'/*name*/, response.uri.replace('file://', '') /*uri*/, 'image/jpeg' /*type*/, function(error, docs)
 {
   console.log(error);
 });
@@ -107,10 +107,7 @@ rnsync.addAttachment('user' /*id*/, 'somepic'/*name*/, response.uri.replace('fil
 All of the CRUD functions only affect the local database.  To push your changes to the remote server you must replicate.
 
 ```javascript
-rnsync.replicate(function(error)
-{
-  console.log(error);
-}
+rnsync.replicate(onSuccessCallback, onFailCallback);
 ```
 
 ## Author
