@@ -96,7 +96,7 @@ rnsync.update(doc.id, function(error)
 Add files/binaries.
 
 ```javascript
-rnsync.addAttachment('user' /*id*/, 'somepic'/*name*/, response.uri.replace('file://', '') /*uri*/, 'image/jpeg' /*type*/, function(error, docs)
+rnsync.addAttachment(doc.id, 'name', response.uri.replace('file://', ''), 'image/jpeg', function(error, docs)
 {
   console.log(error);
 });
