@@ -6,7 +6,7 @@
 
 RNSync is a React Native module that allows you to intereact with your Cloudant or CouchDB database locally on the mobile device and replicate to the remote database when needed.
 
-RNSync is a wrapper for Cloudant Sync, which simplifies large-scale mobile development by enabling you to create a single database for every user; you simply replicate and sync the copy of this database in Cloudant with a local copy on their phone or tablet. This can reduce round-trip database requests with the server. If there’s no network connection, the app runs off the database on the device; when the network connection is restored, Cloudant re-syncs the device and server.
+RNSync is a wrapper for [Cloudant Sync](https://github.com/cloudant/CDTDatastore), which simplifies large-scale mobile development by enabling you to create a single database for every user; you simply replicate and sync the copy of this database in Cloudant with a local copy on their phone or tablet. This can reduce round-trip database requests with the server. If there’s no network connection, the app runs off the database on the device; when the network connection is restored, Cloudant re-syncs the device and server.
 
 You can get your own instance of [Cloudant on Bluemix](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db/) (where a free tier is available).
 
