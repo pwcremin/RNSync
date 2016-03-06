@@ -15,6 +15,8 @@
     CDTDatastore *datastore;
     CDTDatastoreManager *manager;
     CDTReplicator *replicator;
+    CDTReplicatorFactory *replicatorFactory;
+    NSURL *remoteDatabaseURL;
     RCTResponseSenderBlock replicatorDidCompleteCallback;
     RCTResponseSenderBlock replicatorDidErrorCallback;
 }
@@ -77,7 +79,7 @@ RCT_EXPORT_MODULE();
 RCT_EXPORT_METHOD(init: (NSString *)databaseUrl callback:(RCTResponseSenderBlock)callback)
 {
     // Create a CDTDatastoreManager using application internal storage path
-    NSError *outError = nil;
+    NSError *error = nil;
     NSFileManager *fileManager= [NSFileManager defaultManager];
     
     NSURL *documentsDir = [[fileManager URLsForDirectory:NSDocumentDirectory
@@ -85,32 +87,27 @@ RCT_EXPORT_METHOD(init: (NSString *)databaseUrl callback:(RCTResponseSenderBlock
     NSURL *storeURL = [documentsDir URLByAppendingPathComponent:@"cloudant-sync-datastore"];
     NSString *path = [storeURL path];
     
-    manager = [[CDTDatastoreManager alloc] initWithDirectory:path error:&outError];
-    
-    datastore = [manager datastoreNamed:@"my_datastore" error:&outError];
-    
-    // Create and start the replicator -- -start is essential!
-    CDTReplicatorFactory *replicatorFactory =
-    [[CDTReplicatorFactory alloc] initWithDatastoreManager:manager];
-    
-    NSURL *remoteDatabaseURL = [NSURL URLWithString:databaseUrl];
-    
-    // Replicate from the local to remote database
-    CDTPushReplication *pushReplication = [CDTPushReplication replicationWithSource:datastore
-                                                                             target:remoteDatabaseURL];
-    NSError *error;
-    replicator = [replicatorFactory oneWay:pushReplication error:&error];
-    
-    replicator.delegate = self;
+    manager = [[CDTDatastoreManager alloc] initWithDirectory:path error:&error];
     
     if(error)
     {
         callback(@[[NSNumber numberWithLong:error.code]]);
+        return;
     }
-    else
+    
+    datastore = [manager datastoreNamed:@"my_datastore" error:&error];
+    
+    if(error)
     {
-        callback(@[[NSNull null]]);
+        callback(@[[NSNumber numberWithLong:error.code]]);
+        return;
     }
+    
+    replicatorFactory = [[CDTReplicatorFactory alloc] initWithDatastoreManager:manager];
+    
+    remoteDatabaseURL = [NSURL URLWithString:databaseUrl];
+    
+    callback(@[[NSNull null]]);
 }
 
 RCT_EXPORT_METHOD(replicate: (RCTResponseSenderBlock)successCallback errorCallback: (RCTResponseSenderBlock)errrorCallback)
@@ -118,19 +115,15 @@ RCT_EXPORT_METHOD(replicate: (RCTResponseSenderBlock)successCallback errorCallba
     replicatorDidCompleteCallback = successCallback;
     replicatorDidErrorCallback = errrorCallback;
     
+    // Replicate from the local to remote database
+    CDTPushReplication *pushReplication = [CDTPushReplication replicationWithSource:datastore
+                                                                             target:remoteDatabaseURL];
     NSError *error;
     
+    replicator = [replicatorFactory oneWay:pushReplication error:&error];
+    replicator.delegate = self;
+    
     [replicator startWithError: &error];
-}
-
-RCT_EXPORT_METHOD(setReplicatorDidCompleteCallback: (RCTResponseSenderBlock)callback)
-{
-    replicatorDidCompleteCallback = callback;
-}
-
-RCT_EXPORT_METHOD(setReplicatorDidErrorCallback: (RCTResponseSenderBlock)callback)
-{
-    replicatorDidErrorCallback = callback;
 }
 
 RCT_EXPORT_METHOD(create: body id:(NSString*)id callback:(RCTResponseSenderBlock)callback)
@@ -148,7 +141,6 @@ RCT_EXPORT_METHOD(create: body id:(NSString*)id callback:(RCTResponseSenderBlock
         rev = [CDTDocumentRevision revision];
     }
     
-    
     // Use [CDTDocumentRevision revision] to get an ID generated for you on saving
     //  rev.body = [@{
     //                @"description": @"Buy milk",
@@ -162,7 +154,6 @@ RCT_EXPORT_METHOD(create: body id:(NSString*)id callback:(RCTResponseSenderBlock
     }
     
     rev.body = body;
-    
     
     // Save the document to the database
     CDTDocumentRevision *revision = [datastore createDocumentFromRevision:rev error:&error];
