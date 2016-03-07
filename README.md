@@ -55,6 +55,17 @@ rnsync.create(object, id, function(error, doc)
 {
   console.log(doc.id);
 }
+
+rnsync.create({name: 'jon'},  function(error, doc)
+{
+  console.log(doc.id);
+}
+
+rnsync.create('user',  function(error, doc)
+{
+  console.log(doc.id);
+}
+
 ```
 
 #### Retrieve
