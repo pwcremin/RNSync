@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "RNSync"
-  s.version          = "0.1.4"
+  s.version          = "0.1.5"
   s.summary          = "A React Native compatible version of Cloudant Sync"
 
 # This description is used to generate tags and improve search results.

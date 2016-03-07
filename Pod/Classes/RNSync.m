@@ -267,5 +267,23 @@ RCT_EXPORT_METHOD(delete: (NSString *)id callback:(RCTResponseSenderBlock)callba
     }
 }
 
+// TODO this results of the query could be huge (run out of memory huge).  Need param for how many items
+// to return and paging to get the rest
+RCT_EXPORT_METHOD(find: (NSDictionary *)query callback:(RCTResponseSenderBlock)callback)
+{
+    // TODO waste to new up resultList for every call
+    NSMutableArray* resultList = [[NSMutableArray alloc] init];
+    
+    CDTQResultSet *result = [datastore find:query];
+    [result enumerateObjectsUsingBlock:^(CDTDocumentRevision *rev, NSUInteger idx, BOOL *stop)
+     {
+         NSDictionary *dict = @{ @"id" : rev.docId, @"rev" : rev.revId, @"body" : rev.body };
+         
+         [resultList addObject: dict];
+     }];
+    
+    NSArray *params = @[resultList];
+    callback(@[[NSNull null], params]);
+}
 
 @end

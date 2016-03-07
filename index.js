@@ -39,15 +39,11 @@ var Sync = {
 
     retrieve: function ( id, callback )
     {
-        callback = callback || noop;
-
         RNSync.retrieve( id, callback );
     },
 
     findOrCreate: function ( id, callback )
     {
-        callback = callback || noop;
-
         RNSync.retrieve( id, function ( err, doc )
         {
             if ( err === 404 )
@@ -88,8 +84,12 @@ var Sync = {
         callback = callback || noop;
 
         RNSync.addAttachment( id, name, path, type, callback );
-    }
+    },
 
+    find: function( query, callback)
+    {
+        RNSync.find( query, callback );
+    }
 };
 
 module.exports = Sync;
