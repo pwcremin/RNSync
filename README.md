@@ -61,12 +61,22 @@ rnsync.create({name: 'jon'},  function(error, doc)
   console.log(doc.id);
 }
 
+// note: create will return an error if the id already exist
 rnsync.create('user',  function(error, doc)
 {
   console.log(doc.id);
 }
 
 ```
+
+#### Find or Create
+
+Returns the doc with the specified id.  It will create the doc if it does not already exist.
+
+rnsync.findOrCreate('user',  function(error, doc)
+{
+  console.log(doc.id);
+}
 
 #### Retrieve
 
