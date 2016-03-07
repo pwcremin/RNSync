@@ -73,10 +73,12 @@ rnsync.create('user',  function(error, doc)
 
 Returns the doc with the specified id.  It will create the doc if it does not already exist.
 
+```javascript
 rnsync.findOrCreate('user',  function(error, doc)
 {
   console.log(doc.id);
 }
+```
 
 #### Retrieve
 
