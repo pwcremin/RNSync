@@ -112,6 +112,19 @@ All of the CRUD functions only affect the local database.  To push your changes 
 rnsync.replicate(onSuccessCallback, onFailCallback);
 ```
 
+#### Find
+
+Query for documents.  For more details on the query semantics please see the [Cloudant query documentation](https://github.com/cloudant/CDTDatastore/blob/master/doc/query.md)
+
+```javascript
+var query = {name: 'John', age: { '$gt': 25 }};
+
+rnsync.find(query, function(docs)
+{
+  console.log('found ' + docs.length);
+});
+```
+
 ## Author
 
 Patrick Cremin, pwcremin@gmail.com
