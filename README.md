@@ -119,9 +119,9 @@ Query for documents.  For more details on the query semantics please see the [Cl
 ```javascript
 var query = {name: 'John', age: { '$gt': 25 }};
 
-rnsync.find(query, function(result)
+rnsync.find(query, function(docs)
 {
-  console.log('found ' + result[0].length);
+  console.log('found ' + docs.length);
 });
 ```
 
