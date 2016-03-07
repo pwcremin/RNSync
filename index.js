@@ -1,6 +1,8 @@
 var RNSync = require( 'react-native' ).NativeModules.RNSync;
 
-var noop = function(){};
+var noop = function ()
+{
+};
 
 var Sync = {
 
@@ -10,6 +12,7 @@ var Sync = {
 
         var databaseUrl = cloudantServerUrl + '/' + databaseName;
 
+        // TODO handle case where there is no network connectivity
         return fetch( databaseUrl, {
             method: 'PUT'
         } )
@@ -32,27 +35,59 @@ var Sync = {
 
     create: function ( body, id, callback )
     {
+        if ( typeof(body) === 'string' )
+        {
+            callback = id;
+
+            id = body;
+
+            body = null;
+        }
+        else if ( typeof(body) === 'function' )
+        {
+            callback = body;
+
+            body = id = null;
+        }
+
+        if ( typeof(id) === 'function' )
+        {
+            callback = id;
+
+            id = null;
+        }
+
         callback = callback || noop;
 
-        RNSync.create( body, id, callback );
+        RNSync.create( body, id, function ( error, params )
+        {
+            var doc = error ? null : params[ 0 ];
+
+            callback( error, doc );
+        } );
     },
 
     retrieve: function ( id, callback )
     {
-        RNSync.retrieve( id, callback );
+        RNSync.retrieve( id, function ( error, params )
+        {
+            var doc = error ? null : params[0];
+
+            callback( error, doc )
+        } );
     },
 
     findOrCreate: function ( id, callback )
     {
-        RNSync.retrieve( id, function ( err, doc )
+        RNSync.retrieve( id, function ( error, doc )
         {
-            if ( err === 404 )
+            if ( error === 404 )
             {
                 this.create( null, id, callback )
             }
             else
             {
-                callback( err, doc );
+                callback( error, doc );
             }
         }.bind( this ) );
     },
@@ -61,7 +96,12 @@ var Sync = {
     {
         callback = callback || noop;
 
-        RNSync.update( id, rev, body, callback );
+        RNSync.update( id, rev, body, function(error, params)
+        {
+            var doc = error ? null : params[ 0 ];
+
+            callback( error, doc );
+        });
     },
 
     delete: function ( id, callback )
@@ -86,12 +126,12 @@ var Sync = {
         RNSync.addAttachment( id, name, path, type, callback );
     },
 
-    find: function( query, callback)
+    find: function ( query, callback )
     {
-        RNSync.find( query, function(err, params)
+        RNSync.find( query, function ( err, params )
         {
-            callback(err, params[0]);
-        });
+            callback( err, params[ 0 ] );
+        } );
     }
 };
 
