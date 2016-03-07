@@ -88,7 +88,10 @@ var Sync = {
 
     find: function( query, callback)
     {
-        RNSync.find( query, callback );
+        RNSync.find( query, function(err, params)
+        {
+            callback(err, params[0]);
+        });
     }
 };
 
