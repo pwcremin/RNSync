@@ -82,6 +82,8 @@ rnsync.findOrCreate('user',  function(error, doc)
 
 #### Retrieve
 
+Returns the doc with the specified id.
+
 ```javascript
 
 var id = "whatever";
