@@ -112,7 +112,7 @@ rnsync.update(doc.id, doc.rev, doc.body, function(error, doc)
 
 ```javascript
 
-rnsync.update(doc.id, function(error)
+rnsync.delete(doc.id, function(error)
 {
   console.log(error);
 }
