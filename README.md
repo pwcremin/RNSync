@@ -123,7 +123,7 @@ rnsync.delete(doc.id, function(error)
 Add files/binaries.
 
 ```javascript
-rnsync.addAttachment(doc.id, 'name', response.uri.replace('file://', ''), 'image/jpeg', function(error)
+rnsync.addAttachment(doc.id, 'name', uri, 'image/jpeg', function(error)
 {
   console.log(error);
 });
