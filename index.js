@@ -79,7 +79,7 @@ var Sync = {
 
     findOrCreate: function ( id, callback )
     {
-        RNSync.retrieve( id, function ( error, doc )
+        RNSync.retrieve( id, function ( error, params )
         {
             if ( error === 404 )
             {
@@ -87,6 +87,8 @@ var Sync = {
             }
             else
             {
+                var doc = error ? null : params[0];
+
                 callback( error, doc );
             }
         }.bind( this ) );
