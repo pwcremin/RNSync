@@ -131,7 +131,7 @@ rnsync.addAttachment(doc.id, 'name', 'path/to/file.jpg', 'image/jpeg', function(
 
 #### Replicate
 
-All of the CRUD functions only affect the local database.  To push your changes to the remote server you must replicate.
+All of the CRUD functions only affect the local database.  To push your changes to the remote server you must replicate.  For more details see the [replication docs](https://github.com/cloudant/CDTDatastore/blob/master/doc/replication.md)
 
 ```javascript
 rnsync.replicate(onSuccessCallback, onFailCallback);
