@@ -37,7 +37,7 @@ To avoid exposing credentials for the remote system on each device, create a web
 
 - Handle sign in/sign up for users.
 - Create a new remote database for a new user.
-- Grant access to the new database for the new device (e.g., via API keys on Cloudant or the _users database in CouchDB).
+- Grant access to the new database for the new device (e.g., via [API keys on Cloudant](https://cloudant.com/for-developers/faq/auth/) or the _users database in CouchDB).
 - Return the database URL and credentials to the device.
 
 ```javascript
