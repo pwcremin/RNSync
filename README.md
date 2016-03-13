@@ -30,6 +30,16 @@ pod install
 ## Usage
 
 #### Init
+
+The below example exposes your credentials on every device, but it is fine for testing the package. 
+
+To avoid exposing credentials for the remote system on each device, create a web service to authenticate users and set up databases for client devices. This web service needs to:
+
+- Handle sign in/sign up for users.
+- Create a new remote database for a new user.
+- Grant access to the new database for the new device (e.g., via [API keys on Cloudant](https://cloudant.com/for-developers/faq/auth/) or the _users database in CouchDB).
+- Return the database URL and credentials to the device.
+
 ```javascript
 var rnsync = require('rnsync');
 
@@ -131,7 +141,7 @@ rnsync.addAttachment(doc.id, 'name', 'path/to/file.jpg', 'image/jpeg', function(
 
 #### Replicate
 
-All of the CRUD functions only affect the local database.  To push your changes to the remote server you must replicate.
+All of the CRUD functions only affect the local database.  To push your changes to the remote server you must replicate.  For more details see the [replication docs](https://github.com/cloudant/CDTDatastore/blob/master/doc/replication.md)
 
 ```javascript
 rnsync.replicate(onSuccessCallback, onFailCallback);
