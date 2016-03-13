@@ -1,6 +1,6 @@
 {
   "name": "rnsync",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "A local (mobile) NoSQL database that you can replicate to your remote database",
   "main": "index.js",
   "scripts": {
