@@ -35,7 +35,7 @@ pod install
 
 #### Init
 
-The below example exposes your credentials on every device, but it is fine for testing the package. 
+The below example exposes your credentials on every device, and the database must already exist, but it is fine for testing the package. 
 
 To avoid exposing credentials for the remote system on each device, create a web service to authenticate users and set up databases for client devices. This web service needs to:
 
