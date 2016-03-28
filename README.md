@@ -166,7 +166,7 @@ rnsync.find(query, function(docs)
 });
 ```
 ## Known Issues
-- Calling replicate() before a previous replication has completed will error.  Caused by overwritting over sucess/fail callbacks
+- Calling replicate() before a previous replication has completed will error.  Caused by overwritting sucess/fail callbacks
 
 ## Author
 
