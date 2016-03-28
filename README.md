@@ -27,6 +27,10 @@ Pod install
 pod install
 ```
 
+## Udates
+ - 3/28 - all functions now return promises
+ - 3/28 - init() will no longer create the database for you.  Please refer to cloudantApiKeyGenerator/app.js for an example of how to securely create the database and get your api keys (for Cloudant)
+ 
 ## Usage
 
 #### Init
@@ -40,6 +44,8 @@ To avoid exposing credentials for the remote system on each device, create a web
 - Grant access to the new database for the new device (e.g., via [API keys on Cloudant](https://cloudant.com/for-developers/faq/auth/) or the _users database in CouchDB).
 - Return the database URL and credentials to the device.
 
+Please refer to cloudantApiKeyGenerator/app.js for an example of how to securely create the database and get your api keys (for Cloudant)
+ 
 ```javascript
 var rnsync = require('rnsync');
 
