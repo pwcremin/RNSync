@@ -53,7 +53,7 @@ var Sync = {
                     success( null, resolve, callback );
                 }
             } );
-        })
+        } )
     },
 
     create: function ( body, id, callback )
@@ -122,7 +122,7 @@ var Sync = {
                     complete( error, params, resolve, reject, callback );
                 }
             }.bind( this ) );
-        } )
+        }.bind( this ) )
     },
 
     update: function ( id, rev, body, callback )
