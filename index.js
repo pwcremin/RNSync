@@ -1,138 +1,212 @@
 var RNSync = require( 'react-native' ).NativeModules.RNSync;
 
+var Promise = require( 'bluebird' );
+
 var noop = function ()
 {
 };
+
+function fail( error, reject, callback )
+{
+    var error = new Error( error );
+    callback( error );
+    reject( error );
+}
+
+function success( params, resolve, callback )
+{
+    var data = params ? params[ 0 ] : null;
+    callback( null, data );
+    resolve( data );
+}
+
+function complete( error, params, resolve, reject, callback )
+{
+    if ( error )
+    {
+        fail( error, reject, callback );
+    }
+    else
+    {
+        success( params, resolve, callback );
+    }
+}
 
 var Sync = {
 
     init: function ( cloudantServerUrl, databaseName, callback )
     {
-        callback = callback || noop;
+        return new Promise( function ( resolve, reject )
+        {
+            callback = callback || noop;
 
-        var databaseUrl = cloudantServerUrl + '/' + databaseName;
+            var databaseUrl = cloudantServerUrl + '/' + databaseName;
 
-        // TODO handle case where there is no network connectivity
-        return fetch( databaseUrl, {
-            method: 'PUT'
-        } )
-            .then( ( response ) =>
+            RNSync.init( databaseUrl, function ( error )
             {
-                if ( response.status == 201 || response.status == 412 )
+                if ( error )
                 {
-                    RNSync.init( databaseUrl, callback );
+                    fail( error, reject, callback );
                 }
                 else
                 {
-                    callback && callback( 'error: (' + response.status + ') ' + response._bodyInit );
+                    success( null, resolve, callback );
                 }
-            } )
-            .catch( ( error ) =>
-            {
-                callback && callback( error );
-            } )
+            } );
+        })
     },
 
     create: function ( body, id, callback )
     {
-        if ( typeof(body) === 'string' )
+        return new Promise( function ( resolve, reject )
         {
-            callback = id;
+            if ( typeof(body) === 'string' )
+            {
+                callback = id;
 
-            id = body;
+                id = body;
 
-            body = null;
-        }
-        else if ( typeof(body) === 'function' )
-        {
-            callback = body;
+                body = null;
+            }
+            else if ( typeof(body) === 'function' )
+            {
+                callback = body;
 
-            body = id = null;
-        }
+                body = id = null;
+            }
 
-        if ( typeof(id) === 'function' )
-        {
-            callback = id;
+            if ( typeof(id) === 'function' )
+            {
+                callback = id;
 
-            id = null;
-        }
+                id = null;
+            }
 
-        callback = callback || noop;
+            callback = callback || noop;
 
-        RNSync.create( body, id, function ( error, params )
-        {
-            var doc = error ? null : params[ 0 ];
+            RNSync.create( body, id, function ( error, params )
+            {
+                complete( error, params, resolve, reject, callback );
+            } );
+        } )
 
-            callback( error, doc );
-        } );
     },
 
     retrieve: function ( id, callback )
     {
-        RNSync.retrieve( id, function ( error, params )
+        return new Promise( function ( resolve, reject )
         {
-            var doc = error ? null : params[0];
+            callback = callback || noop;
 
-            callback( error, doc )
-        } );
+            RNSync.retrieve( id, function ( error, params )
+            {
+                complete( error, params, resolve, reject, callback );
+            } );
+        } )
     },
 
     findOrCreate: function ( id, callback )
     {
-        RNSync.retrieve( id, function ( error, params )
+        return new Promise( function ( resolve, reject )
         {
-            if ( error === 404 )
-            {
-                this.create( null, id, callback )
-            }
-            else
-            {
-                var doc = error ? null : params[0];
+            callback = callback || noop;
 
-                callback( error, doc );
-            }
-        }.bind( this ) );
+            RNSync.retrieve( id, function ( error, params )
+            {
+                if ( error === 404 )
+                {
+                    return this.create( null, id, callback )
+                }
+                else
+                {
+                    complete( error, params, resolve, reject, callback );
+                }
+            }.bind( this ) );
+        } )
     },
 
     update: function ( id, rev, body, callback )
     {
-        callback = callback || noop;
-
-        RNSync.update( id, rev, body, function(error, params)
+        return new Promise( function ( resolve, reject )
         {
-            var doc = error ? null : params[ 0 ];
+            if ( typeof(id) === 'object' )
+            {
+                var doc = id;
+                id = doc.id;
+                rev = doc.rev;
+                body = doc.body;
+            }
 
-            callback( error, doc );
-        });
+            callback = callback || noop;
+
+            RNSync.update( id, rev, body, function ( error, params )
+            {
+                complete( error, params, resolve, reject, callback );
+            } );
+        } )
     },
 
     delete: function ( id, callback )
     {
-        callback = callback || noop;
+        return new Promise( function ( resolve, reject )
+        {
+            callback = callback || noop;
 
-        RNSync.delete( id, callback );
+            if ( typeof(id) === 'object' )
+            {
+                id = id.id; // doc.id
+            }
+
+            RNSync.delete( id, function ( error )
+            {
+                complete( error, null, resolve, reject, callback );
+            } );
+        } );
+
     },
 
-    replicate: function ( successCallback, errorCallback )
+    replicate: function ( callback )
     {
-        successCallback = successCallback || noop;
-        errorCallback = errorCallback || noop;
+        return new Promise( function ( resolve, reject )
+        {
+            callback = callback || noop;
 
-        RNSync.replicate( successCallback, errorCallback );
+            RNSync.replicate( function ()
+            {
+                // on success
+                complete( null, null, resolve, reject, callback );
+            }, function ( error )
+            {
+                // on failure
+                complete( error, null, resolve, reject, callback );
+            } );
+        } );
     },
 
     addAttachment: function ( id, name, path, type, callback )
     {
-        callback = callback || noop;
+        return new Promise( function ( resolve, reject )
+        {
+            callback = callback || noop;
 
-        RNSync.addAttachment( id, name, path, type, callback );
+            RNSync.addAttachment( id, name, path, type, function ( error, params )
+            {
+                complete( error, params, resolve, reject, callback );
+            } );
+
+        } );
     },
 
     find: function ( query, callback )
     {
-        RNSync.find( query, function ( err, params )
+        return new Promise( function ( resolve, reject )
         {
-            callback( err, params[ 0 ] );
+            callback = callback || noop;
+
+            RNSync.find( query, function ( error, params )
+            {
+                complete( error, params, resolve, reject, callback );
+            } );
         } );
     }
 };

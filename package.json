@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/pwcremin/RNSync/issues"
   },
-  "homepage": "https://github.com/pwcremin/RNSync#readme"
+  "homepage": "https://github.com/pwcremin/RNSync#readme",
+  "dependencies": {
+    "bluebird": "^3.3.4"
+  }
 }
