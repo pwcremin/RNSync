@@ -1,5 +1,5 @@
 {
-  "name": "RNSync",
+  "name": "rnsync",
   "version": "1.0.0",
   "description": "A local (mobile) NoSQL database that you can replicate to your remote database",
   "main": "index.js",
