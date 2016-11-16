@@ -8,7 +8,7 @@ RNSync is a React Native module that allows you to work with your Cloudant or Co
 
 RNSync is a wrapper for [Cloudant Sync](https://github.com/cloudant/CDTDatastore), which simplifies large-scale mobile development by enabling you to create a single database for every user; you simply replicate and sync the copy of this database in Cloudant with a local copy on their phone or tablet. This can reduce round-trip database requests with the server. If there’s no network connection, the app runs off the database on the device; when the network connection is restored, Cloudant re-syncs the device and server.
 
-You can get your own instance of [Cloudant on Bluemix](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db/) (where a free tier is available).
+Sign up for [Bluemix](http://bit.ly/2fYtrCz) and you can get your own instance of [Cloudant](http://bit.ly/2eH8lbY) (where a free tier is available).
 
 ## Installation
 
@@ -17,7 +17,9 @@ Install with npm
 npm install --save rnsync
 ```
 
-Edit your Podfile
+### iOS
+
+Edit your Podfile (find help with setting up CocoaPods [here](https://guides.cocoapods.org/using/using-cocoapods.html). Hint: its easy)
 ```ruby
 pod 'rnsync', :path => '../node_modules/rnsync'
 ```
@@ -26,8 +28,14 @@ Pod install
 ```ruby
 pod install
 ```
+### Android
+
+```ruby
+react-native link rnsync
+```
 
 ## Udates
+ - 11/16 - added Android support.  Removed 'addAttachment' until its functionality is fully implemented.
  - 3/28 - all functions now return promises
  - 3/28 - init() will no longer create the database for you.  Please refer to cloudantApiKeyGenerator/app.js for an example of how to securely create the database and get your api keys (for Cloudant)
  
@@ -37,7 +45,7 @@ pod install
 
 The below example exposes your credentials on every device, and the database must already exist, but it is fine for testing the package. 
 
-To avoid exposing credentials for the remote system on each device, create a web service to authenticate users and set up databases for client devices. This web service needs to:
+To avoid exposing credentials create a web service to authenticate users and set up databases for client devices. This web service needs to:
 
 - Handle sign in/sign up for users.
 - Create a new remote database for a new user.
@@ -132,17 +140,6 @@ rnsync.delete(doc.id, function(error)
 {
   console.log(error);
 }
-```
-
-#### Add Attachment
-
-Add files/binaries.
-
-```javascript
-rnsync.addAttachment(doc.id, 'name', 'path/to/file.jpg', 'image/jpeg', function(error)
-{
-  console.log(error);
-});
 ```
 
 #### Replicate
