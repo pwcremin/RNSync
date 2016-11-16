@@ -30,7 +30,9 @@ pod install
 ```
 ### Android
 
+```ruby
 react-native link rnsync
+```
 
 ## Udates
  - 3/28 - all functions now return promises
