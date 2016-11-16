@@ -12,11 +12,12 @@ You can get your own instance of [Cloudant on Bluemix](https://console.ng.bluemi
 
 ## Installation
 
-### iOS
 Install with npm
 ```ruby
 npm install --save rnsync
 ```
+
+### iOS
 
 Edit your Podfile
 ```ruby
