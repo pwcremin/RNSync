@@ -7,7 +7,7 @@
 #
 
 Pod::Spec.new do |s|
-    s.name             = "RNSync"
+    s.name             = "rnsync"
     s.version          = "0.1.7"
     s.summary          = "A React Native compatible version of Cloudant Sync"
 

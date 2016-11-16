@@ -105,30 +105,28 @@ public class RNSyncModule extends ReactContextBaseJavaModule {
 
     // TODO need push and pull replication functions
     @ReactMethod
-    public void replicate(Callback successCallback, Callback errorCallback) {
+    public void replicatePush(Callback successCallback, Callback errorCallback) {
 
         // Replicate from the local to remote database
-        Replicator pushReplicator = ReplicatorBuilder.push().from(ds).to(uri).build();
+        Replicator replicator = ReplicatorBuilder.push().from(ds).to(uri).build();
 
         CountDownLatch latch = new CountDownLatch(1);
 
         Listener listener = new Listener(latch);
 
-        pushReplicator.getEventBus().register(listener);
+        replicator.getEventBus().register(listener);
 
         // Fire-and-forget (there are easy ways to monitor the state too)
-        pushReplicator.start();
+        replicator.start();
 
         try {
             latch.await();
 
-            if(listener.error != null)
-            {
+            if (replicator.getState() != Replicator.State.COMPLETE) {
                 errorCallback.invoke(listener.error.getException().getMessage());
-            }
-            else
-            {
-                successCallback.invoke(null, listener.documentsReplicated);
+            } else {
+                successCallback.invoke(null, String.format("Replicated %d documents in %d batches",
+                        listener.documentsReplicated, listener.batchesReplicated));
             }
         }
         catch (Exception e)
@@ -136,7 +134,42 @@ public class RNSyncModule extends ReactContextBaseJavaModule {
             errorCallback.invoke(e.getMessage());
         }
         finally {
-            pushReplicator.getEventBus().unregister(listener);
+            replicator.getEventBus().unregister(listener);
+        }
+    }
+
+    @ReactMethod
+    public void replicatePull(Callback successCallback, Callback errorCallback) {
+
+        // Replicate from the local to remote database
+        Replicator replicator = ReplicatorBuilder.pull().from(uri).to(ds).build();
+
+        CountDownLatch latch = new CountDownLatch(1);
+
+        Listener listener = new Listener(latch);
+
+        replicator.getEventBus().register(listener);
+
+        replicator.start();
+
+        try {
+            latch.await();
+            replicator.getEventBus().unregister(listener);
+
+            if (replicator.getState() != Replicator.State.COMPLETE) {
+                errorCallback.invoke(listener.error.getException().getMessage());
+            } else {
+                successCallback.invoke(null, String.format("Replicated %d documents in %d batches",
+                        listener.documentsReplicated, listener.batchesReplicated));
+            }
+
+        }
+        catch (Exception e)
+        {
+            errorCallback.invoke(e.getMessage());
+        }
+        finally {
+            replicator.getEventBus().unregister(listener);
         }
     }
 

@@ -168,13 +168,31 @@ var Sync = {
 
     },
 
-    replicate: function ( callback )
+    replicatePush: function ( callback )
     {
         return new Promise( function ( resolve, reject )
         {
             callback = callback || noop;
 
-            RNSync.replicate( function ()
+            RNSync.replicatePull( function ()
+            {
+                // on success
+                complete( null, null, resolve, reject, callback );
+            }, function ( error )
+            {
+                // on failure
+                complete( error, null, resolve, reject, callback );
+            } );
+        } );
+    },
+
+    replicatePull: function ( callback )
+    {
+        return new Promise( function ( resolve, reject )
+        {
+            callback = callback || noop;
+
+            RNSync.replicatePush( function ()
             {
                 // on success
                 complete( null, null, resolve, reject, callback );
