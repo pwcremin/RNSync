@@ -12,6 +12,7 @@ You can get your own instance of [Cloudant on Bluemix](https://console.ng.bluemi
 
 ## Installation
 
+### iOS
 Install with npm
 ```ruby
 npm install --save rnsync
@@ -26,6 +27,9 @@ Pod install
 ```ruby
 pod install
 ```
+### Android
+
+react-native link rnsync
 
 ## Udates
  - 3/28 - all functions now return promises
@@ -132,17 +136,6 @@ rnsync.delete(doc.id, function(error)
 {
   console.log(error);
 }
-```
-
-#### Add Attachment
-
-Add files/binaries.
-
-```javascript
-rnsync.addAttachment(doc.id, 'name', 'path/to/file.jpg', 'image/jpeg', function(error)
-{
-  console.log(error);
-});
 ```
 
 #### Replicate
