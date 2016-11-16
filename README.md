@@ -21,7 +21,7 @@ npm install --save rnsync
 
 Edit your Podfile (find help with setting up CocoaPods [here](https://guides.cocoapods.org/using/using-cocoapods.html). Hint: its easy)
 ```ruby
-pod 'rnsync', :path => '../node_modules/rnsync'
+pod 'rnsync', :path => '../node_modules/rnsync/ios'
 ```
 
 Pod install
