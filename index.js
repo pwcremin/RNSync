@@ -1,10 +1,7 @@
 var RNSync = require( 'react-native' ).NativeModules.RNSync;
+import { Platform } from 'react-native';
 
-var Promise = require( 'bluebird' );
-
-var noop = function ()
-{
-};
+const noop = () => {};
 
 function fail( error, reject, callback )
 {
@@ -15,7 +12,13 @@ function fail( error, reject, callback )
 
 function success( params, resolve, callback )
 {
-    var data = params ? params[ 0 ] : null;
+    var data = params;
+
+    if(Platform.OS === "ios")
+    {
+        data = params ? params[ 0 ] : null;
+    }
+
     callback( null, data );
     resolve( data );
 }
@@ -183,6 +186,7 @@ var Sync = {
         } );
     },
 
+    // TODO currently you can only add attachments.  No modiify or delete
     addAttachment: function ( id, name, path, type, callback )
     {
         return new Promise( function ( resolve, reject )
@@ -205,6 +209,14 @@ var Sync = {
 
             RNSync.find( query, function ( error, params )
             {
+                if(Platform.OS === "android")
+                {
+                    params = params.map(function(doc)
+                    {
+                        return JSON.parse(doc);
+                    })
+                }
+
                 complete( error, params, resolve, reject, callback );
             } );
         } );

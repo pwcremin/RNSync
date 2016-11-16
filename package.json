@@ -1,27 +1,19 @@
 {
-  "name": "rnsync",
-  "version": "0.1.12",
+  "name": "RNSync",
+  "version": "0.1.14",
   "description": "A local (mobile) NoSQL database that you can replicate to your remote database",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pwcremin/RNSync.git"
+    "url": "https://github.com/pwcremin/RNSync"
   },
   "keywords": [
     "react-component",
     "react-native",
-    "ios"
+    "ios",
+    "android",
+    "cocoapod"
   ],
-  "author": "Patrick Cremin",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/pwcremin/RNSync/issues"
-  },
-  "homepage": "https://github.com/pwcremin/RNSync#readme",
-  "dependencies": {
-    "bluebird": "^3.3.4"
-  }
+  "author": "Patrick Cremin <pwcremin@gmail.com> (https://github.com/pwcremin)",
+  "license": "MIT"
 }
