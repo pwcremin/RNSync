@@ -35,6 +35,7 @@ react-native link rnsync
 ```
 
 ## Udates
+ - 11/16 - added Android support.  Removed 'addAttachment' until its functionality is fully implemented.
  - 3/28 - all functions now return promises
  - 3/28 - init() will no longer create the database for you.  Please refer to cloudantApiKeyGenerator/app.js for an example of how to securely create the database and get your api keys (for Cloudant)
  
@@ -44,7 +45,7 @@ react-native link rnsync
 
 The below example exposes your credentials on every device, and the database must already exist, but it is fine for testing the package. 
 
-To avoid exposing credentials for the remote system on each device, create a web service to authenticate users and set up databases for client devices. This web service needs to:
+To avoid exposing credentials create a web service to authenticate users and set up databases for client devices. This web service needs to:
 
 - Handle sign in/sign up for users.
 - Create a new remote database for a new user.
