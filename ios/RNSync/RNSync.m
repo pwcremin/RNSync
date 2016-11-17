@@ -114,7 +114,7 @@ RCT_EXPORT_METHOD(init: (NSString *)databaseUrl callback:(RCTResponseSenderBlock
     callback(@[[NSNull null]]);
 }
 
-RCT_EXPORT_METHOD(replicate: (RCTResponseSenderBlock)successCallback errorCallback: (RCTResponseSenderBlock)errrorCallback)
+RCT_EXPORT_METHOD(replicatePush: (RCTResponseSenderBlock)successCallback errorCallback: (RCTResponseSenderBlock)errrorCallback)
 {
     replicatorDidCompleteCallback = successCallback;
     replicatorDidErrorCallback = errrorCallback;
@@ -125,6 +125,22 @@ RCT_EXPORT_METHOD(replicate: (RCTResponseSenderBlock)successCallback errorCallba
     NSError *error;
     
     replicator = [replicatorFactory oneWay:pushReplication error:&error];
+    replicator.delegate = self;
+    
+    [replicator startWithError: &error];
+}
+
+RCT_EXPORT_METHOD(replicatePull: (RCTResponseSenderBlock)successCallback errorCallback: (RCTResponseSenderBlock)errrorCallback)
+{
+    replicatorDidCompleteCallback = successCallback;
+    replicatorDidErrorCallback = errrorCallback;
+    
+    CDTPullReplication *pullReplication = [CDTPullReplication replicationWithSource:remoteDatabaseURL
+                                                                             target:datastore];
+    
+    NSError *error;
+    
+    replicator = [replicatorFactory oneWay:pullReplication error:&error];
     replicator.delegate = self;
     
     [replicator startWithError: &error];

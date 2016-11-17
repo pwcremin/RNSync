@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
     s.name             = "rnsync"
-    s.version          = "0.1.7"
+    s.version          = "1.0.0"
     s.summary          = "A React Native compatible version of Cloudant Sync"
 
     s.homepage         = "https://github.com/pwcremin/RNSync"
@@ -22,8 +22,8 @@ Pod::Spec.new do |s|
     s.source_files = 'RNSync/**'
     s.public_header_files = 'RNSync/**/*.h'
 
+    s.xcconfig = { 'HEADER_SEARCH_PATHS' => '"$(PODS_ROOT)/../../node_modules/react-native/React/**" ' }
     #s.requires_arc = true
 
-    s.dependency 'React'
     s.dependency 'CDTDatastore'
 end
