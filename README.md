@@ -35,9 +35,12 @@ react-native link rnsync
 ```
 
 ## Udates
- - 11/16 - added Android support.  Removed 'addAttachment' until its functionality is fully implemented.
- - 3/28 - all functions now return promises
- - 3/28 - init() will no longer create the database for you.  Please refer to cloudantApiKeyGenerator/app.js for an example of how to securely create the database and get your api keys (for Cloudant)
+ * 11/16 - 
+   * Added Android support
+   * Both pull and push replication are now supported (the replicate function has been replaced with replicatePull and replicatePush)
+   * Removed 'addAttachment' until its functionality is fully implemented
+ * 3/28 - all functions now return promises
+ * 3/28 - init() will no longer create the database for you.  Please refer to cloudantApiKeyGenerator/app.js for an example of how to securely create the database and get your api keys (for Cloudant)
  
 ## Usage
 
