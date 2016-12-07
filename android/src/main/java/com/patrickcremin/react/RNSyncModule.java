@@ -5,6 +5,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.Arguments;
@@ -38,6 +39,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Iterator;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 class Listener {
@@ -105,7 +107,7 @@ public class RNSyncModule extends ReactContextBaseJavaModule {
 
     // TODO need push and pull replication functions
     @ReactMethod
-    public void replicatePush(Callback successCallback, Callback errorCallback) {
+    public void replicatePush(Callback callback) {
 
         // Replicate from the local to remote database
         Replicator replicator = ReplicatorBuilder.push().from(ds).to(uri).build();
@@ -123,15 +125,15 @@ public class RNSyncModule extends ReactContextBaseJavaModule {
             latch.await();
 
             if (replicator.getState() != Replicator.State.COMPLETE) {
-                errorCallback.invoke(listener.error.getException().getMessage());
+                callback.invoke(listener.error.getException().getMessage());
             } else {
-                successCallback.invoke(null, String.format("Replicated %d documents in %d batches",
+                callback.invoke(null, String.format("Replicated %d documents in %d batches",
                         listener.documentsReplicated, listener.batchesReplicated));
             }
         }
         catch (Exception e)
         {
-            errorCallback.invoke(e.getMessage());
+            callback.invoke(e.getMessage());
         }
         finally {
             replicator.getEventBus().unregister(listener);
@@ -139,7 +141,7 @@ public class RNSyncModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void replicatePull(Callback successCallback, Callback errorCallback) {
+    public void replicatePull(Callback callback) {
 
         // Replicate from the local to remote database
         Replicator replicator = ReplicatorBuilder.pull().from(uri).to(ds).build();
@@ -157,16 +159,16 @@ public class RNSyncModule extends ReactContextBaseJavaModule {
             replicator.getEventBus().unregister(listener);
 
             if (replicator.getState() != Replicator.State.COMPLETE) {
-                errorCallback.invoke(listener.error.getException().getMessage());
+                callback.invoke(listener.error.getException().getMessage());
             } else {
-                successCallback.invoke(null, String.format("Replicated %d documents in %d batches",
+                callback.invoke(null, String.format("Replicated %d documents in %d batches",
                         listener.documentsReplicated, listener.batchesReplicated));
             }
 
         }
         catch (Exception e)
         {
-            errorCallback.invoke(e.getMessage());
+            callback.invoke(e.getMessage());
         }
         finally {
             replicator.getEventBus().unregister(listener);
@@ -287,11 +289,26 @@ public class RNSyncModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void find(ReadableMap query, Callback callback) {
+    public void find(ReadableMap query, ReadableArray fields, Callback callback) {
 
         ReadableNativeMap nativeQuery = (ReadableNativeMap) query;
 
-        QueryResult result = im.find(nativeQuery.toHashMap());
+        QueryResult result;
+
+        if(fields == null)
+        {
+            result = im.find(nativeQuery.toHashMap(), 0, 0, null, null);
+        }
+        else
+        {
+            List<String> fieldslist = new ArrayList<>();
+            for (int i = 0; i < fields.size(); i++) {
+                fieldslist.add(fields.getString(i));
+            }
+
+            result = im.find(nativeQuery.toHashMap(), 0, 0, fieldslist, null);
+        }
+
 
         WritableArray docs = new WritableNativeArray();
 

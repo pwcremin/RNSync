@@ -1,244 +1,322 @@
-var RNSync = require( 'react-native' ).NativeModules.RNSync;
-import { Platform } from 'react-native';
+var rnsyncModule = require( 'react-native' ).NativeModules.RNSync;
+import {Platform} from 'react-native';
 
-const noop = () => {};
+const promisify = require("es6-promisify");
 
-function fail( error, reject, callback )
+const noop = () =>
 {
-    var error = new Error( error );
-    callback( error );
-    reject( error );
-}
+};
 
-function success( params, resolve, callback )
-{
-    var data = params;
+class RNSyncStorage {
 
-    if(Platform.OS === "ios")
+    setItem ( key, value, callback )
     {
-        data = params ? params[ 0 ] : null;
-    }
+        callback = callback || noop;
 
-    callback( null, data );
-    resolve( data );
-}
+        // value is a string, but we need a data blob
+        let body = { value }
 
-function complete( error, params, resolve, reject, callback )
-{
-    if ( error )
-    {
-        fail( error, reject, callback );
-    }
-    else
-    {
-        success( params, resolve, callback );
-    }
-}
-
-var Sync = {
-
-    init: function ( cloudantServerUrl, databaseName, callback )
-    {
-        return new Promise( function ( resolve, reject )
+        rnsyncModule.retrieve( key, ( error, doc ) =>
         {
-            callback = callback || noop;
+            if(error)     // should be 404
+            {
+                rnsyncModule.create( body, key, callback );
+            }
+            else
+            {
+                rnsyncModule.update( doc.id, doc.key, body, callback );
+            }
+        } );
+    }
 
+    getItem ( key, callback )
+    {
+        callback = callback || noop;
+
+        rnsyncModule.retrieve( key, ( error, doc ) =>
+        {
+            let item = error ? null : doc.body.value;
+
+            callback(error, item);
+        } );
+
+    }
+
+    removeItem ( key, callback )
+    {
+        callback = callback || noop;
+
+        rnsyncModule.delete( key, callback );
+    }
+
+    getAllKeys ( callback )
+    {
+        callback = callback || noop;
+
+        // using _id as the field isn't right (since the body doesn't contain an _id) but
+        // it keeps the body from returning since the field doesn't exist
+        // TODO try ' '?
+        rnsyncModule.find( {'_id': {'$exists': true } }, ['_id'], ( error, docs ) =>
+        {
+            if(error)
+            {
+                callback(error);
+                return;
+            }
+
+            if ( Platform.OS === "android" )
+            {
+                docs = docs.map( doc => JSON.parse( doc ) )
+            }
+
+            let keys = docs.map( doc => {
+                return doc.id
+            })
+
+            callback( null, keys );
+        } );
+    }
+
+    deleteAllKeys( callback )
+    {
+        this.getAllKeys( (error, keys ) =>
+        {
+            if(error)
+            {
+                callback(error)
+            }
+            else
+            {
+                for (let i = 0; i < keys.length; i++) {
+                    let key = keys[i];
+                    this.removeItem(key)
+                }
+
+                callback(null)
+            }
+
+        })
+    }
+}
+
+class RNSyncWrapper
+{
+    // TODO specify the name of the local datastore
+    init ( cloudantServerUrl, databaseName, callback )
+    {
+        callback = callback || noop;
+
+        return new Promise( ( resolve, reject ) =>
+        {
             var databaseUrl = cloudantServerUrl + '/' + databaseName;
 
-            RNSync.init( databaseUrl, function ( error )
+            rnsyncModule.init( databaseUrl, error =>
             {
-                if ( error )
-                {
-                    fail( error, reject, callback );
-                }
-                else
-                {
-                    success( null, resolve, callback );
-                }
+                callback( error );
+                if(error) reject(error);
+                else resolve()
             } );
         } )
-    },
+    }
 
-    create: function ( body, id, callback )
+    create ( body, id, callback )
     {
-        return new Promise( function ( resolve, reject )
+        callback = callback || noop;
+
+        if ( typeof(body) === 'string' && typeof(id) === 'function')
         {
-            if ( typeof(body) === 'string' )
+            callback = id;
+
+            id = body;
+
+            body = null;
+        }
+        else if ( typeof(body) === 'function' )
+        {
+            callback = body;
+
+            body = id = null;
+        }
+
+        if ( typeof(id) === 'function' )
+        {
+            callback = id;
+
+            id = null;
+        }
+
+        return new Promise( (resolve, reject) =>
+        {
+            rnsyncModule.create( body, id, ( error, doc ) =>
             {
-                callback = id;
-
-                id = body;
-
-                body = null;
-            }
-            else if ( typeof(body) === 'function' )
-            {
-                callback = body;
-
-                body = id = null;
-            }
-
-            if ( typeof(id) === 'function' )
-            {
-                callback = id;
-
-                id = null;
-            }
-
-            callback = callback || noop;
-
-            RNSync.create( body, id, function ( error, params )
-            {
-                complete( error, params, resolve, reject, callback );
+                callback( error, doc );
+                if(error) reject(error);
+                else resolve(doc)
             } );
-        } )
+        })
+    }
 
-    },
-
-    retrieve: function ( id, callback )
+    retrieve ( id, callback )
     {
-        return new Promise( function ( resolve, reject )
-        {
-            callback = callback || noop;
+        callback = callback || noop;
 
-            RNSync.retrieve( id, function ( error, params )
+        return new Promise( (resolve, reject) =>
+        {
+            rnsyncModule.retrieve( id, ( error, doc ) =>
             {
-                complete( error, params, resolve, reject, callback );
+                callback( error, doc );
+                if(error) reject(error);
+                else resolve(doc)
             } );
-        } )
-    },
+        })
+    }
 
-    findOrCreate: function ( id, callback )
+    findOrCreate ( id, callback )
     {
-        return new Promise( function ( resolve, reject )
-        {
-            callback = callback || noop;
+        callback = callback || noop;
 
-            RNSync.retrieve( id, function ( error, params )
+        return new Promise( (resolve, reject) =>
+        {
+            rnsyncModule.retrieve( id,  ( error, doc ) =>
             {
                 if ( error === 404 )
                 {
-                    return this.create( null, id, callback )
+                    this.create( null, id, (error, doc) =>
+                    {
+                        callback( error, doc );
+                        if(error) reject(error);
+                        else resolve(doc)
+                    })
                 }
                 else
                 {
-                    complete( error, params, resolve, reject, callback );
+                    callback( error, doc );
+                    if(error) reject(error);
+                    else resolve(doc)
                 }
-            }.bind( this ) );
-        }.bind( this ) )
-    },
-
-    update: function ( id, rev, body, callback )
-    {
-        return new Promise( function ( resolve, reject )
-        {
-            if ( typeof(id) === 'object' )
-            {
-                var doc = id;
-                id = doc.id;
-                rev = doc.rev;
-                body = doc.body;
-            }
-
-            callback = callback || noop;
-
-            RNSync.update( id, rev, body, function ( error, params )
-            {
-                complete( error, params, resolve, reject, callback );
-            } );
-        } )
-    },
-
-    delete: function ( id, callback )
-    {
-        return new Promise( function ( resolve, reject )
-        {
-            callback = callback || noop;
-
-            if ( typeof(id) === 'object' )
-            {
-                id = id.id; // doc.id
-            }
-
-            RNSync.delete( id, function ( error )
-            {
-                complete( error, null, resolve, reject, callback );
-            } );
-        } );
-
-    },
-
-    replicatePush: function ( callback )
-    {
-        return new Promise( function ( resolve, reject )
-        {
-            callback = callback || noop;
-
-            RNSync.replicatePull( function ()
-            {
-                // on success
-                complete( null, null, resolve, reject, callback );
-            }, function ( error )
-            {
-                // on failure
-                complete( error, null, resolve, reject, callback );
-            } );
-        } );
-    },
-
-    replicatePull: function ( callback )
-    {
-        return new Promise( function ( resolve, reject )
-        {
-            callback = callback || noop;
-
-            RNSync.replicatePush( function ()
-            {
-                // on success
-                complete( null, null, resolve, reject, callback );
-            }, function ( error )
-            {
-                // on failure
-                complete( error, null, resolve, reject, callback );
-            } );
-        } );
-    },
-
-    // TODO currently you can only add attachments.  No modiify or delete
-    addAttachment: function ( id, name, path, type, callback )
-    {
-        return new Promise( function ( resolve, reject )
-        {
-            callback = callback || noop;
-
-            RNSync.addAttachment( id, name, path, type, function ( error, params )
-            {
-                complete( error, params, resolve, reject, callback );
-            } );
-
-        } );
-    },
-
-    find: function ( query, callback )
-    {
-        return new Promise( function ( resolve, reject )
-        {
-            callback = callback || noop;
-
-            RNSync.find( query, function ( error, params )
-            {
-                if(Platform.OS === "android")
-                {
-                    params = params.map(function(doc)
-                    {
-                        return JSON.parse(doc);
-                    })
-                }
-
-                complete( error, params, resolve, reject, callback );
-            } );
-        } );
+            });
+        })
     }
-};
 
-module.exports = Sync;
+    update ( id, rev, body, callback )
+    {
+        callback = callback || noop;
+
+        if ( typeof(id) === 'object' )
+        {
+            var doc = id;
+            id = doc.id;
+            rev = doc.rev;
+            body = doc.body;
+        }
+
+        return new Promise( (resolve, reject) =>
+        {
+            rnsyncModule.update( id, rev, body, ( error, doc ) =>
+            {
+                callback( error, doc );
+                if(error) reject(error);
+                else resolve(doc)
+            } );
+        })
+    }
+
+    delete ( id, callback )
+    {
+        callback = callback || noop;
+
+        if ( typeof(id) === 'object' )
+        {
+            id = id.id; // doc.id
+        }
+
+        return new Promise( (resolve, reject) =>
+        {
+            rnsyncModule.delete( id, ( error ) =>
+            {
+                callback( error );
+                if(error) reject(error);
+                else resolve()
+            } );
+        });
+
+    }
+
+    replicateSync( callback )
+    {
+        callback = callback || noop;
+
+        var pushPromise = this.replicatePush();
+        var pullPromise = this.replicatePull();
+
+        return Promise.all([pushPromise, pullPromise])
+            .then(callback)
+            .catch( e => {
+                callback(e);
+                throw(e);
+            })
+    }
+
+    replicatePush ( callback )
+    {
+        callback = callback || noop;
+
+        return new Promise( (resolve, reject) =>
+        {
+            rnsyncModule.replicatePush( (error) =>
+            {
+                callback( error );
+                if(error) reject(error);
+                else resolve()
+            })
+        });
+    }
+
+    replicatePull ( callback )
+    {
+        callback = callback || noop;
+
+        return new Promise( (resolve, reject) =>
+        {
+            rnsyncModule.replicatePull( (error) =>
+            {
+                callback( error );
+                if(error) reject(error);
+                else resolve()
+            })
+        });
+    }
+
+    // For how to create a query: https://github.com/cloudant/CDTDatastore/blob/master/doc/query.md
+    // The 'fields' arugment is for projection.  Its an array of fields that you want returned when you do not want the entire doc
+    find ( query, fields, callback )
+    {
+        callback = callback || noop;
+
+        if(typeof(fields) === 'function')
+        {
+            callback = fields;
+            fields = null;
+        }
+
+        return new Promise( (resolve, reject) =>
+        {
+            rnsyncModule.find( query, fields, ( error, docs ) =>
+            {
+                if ( !error && Platform.OS === "android" )
+                {
+                    docs = docs.map( doc => JSON.parse( doc ) )
+                }
+
+                callback( error, docs );
+                if(error) reject(error);
+                else resolve(docs)
+            } );
+
+        });
+    }
+}
+
+export const rnsyncStorage = new RNSyncStorage();
+export default new RNSyncWrapper();
+

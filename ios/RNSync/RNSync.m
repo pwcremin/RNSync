@@ -9,6 +9,9 @@
 #import "RNSync.h"
 #import "RCTBridge.h"
 #import "RCTEventDispatcher.h"
+#import "ReplicationManager.h";
+#import "CloudantSync.h"
+
 
 @implementation RNSync
 {
@@ -19,6 +22,7 @@
     NSURL *remoteDatabaseURL;
     RCTResponseSenderBlock replicatorDidCompleteCallback;
     RCTResponseSenderBlock replicatorDidErrorCallback;
+    ReplicationManager* replicationManager;
 }
 
 
@@ -35,49 +39,6 @@ RCT_EXPORT_MODULE();
     return sharedInstance;
 }
 
-/**
- * <p>Called when a state transition to COMPLETE or STOPPED is
- * completed.</p>
- *
- * <p>May be called from any worker thread.</p>
- *
- * <p>Continuous replications (when implemented) will never complete.</p>
- *
- * @param replicator the replicator issuing the event.
- */
-- (void)replicatorDidComplete:(CDTReplicator *)replicator
-{
-    if(replicatorDidCompleteCallback)
-    {
-        replicatorDidCompleteCallback(@[[NSNull null]]);
-    }
-}
-
-
-/**
- * <p>Called when a state transition to ERROR is completed.</p>
- *
- * <p>Errors may include things such as:</p>
- *
- * <ul>
- *      <li>incorrect credentials</li>
- *      <li>network connection unavailable</li>
- * </ul>
- *
- *
- * <p>May be called from any worker thread.</p>
- *
- * @param replicator the replicator issuing the event.
- * @param info information about the error that occurred.
- */
-- (void)replicatorDidError:(CDTReplicator *)replicator info:(NSError *)error
-{
-    if(replicatorDidErrorCallback)
-    {
-        replicatorDidErrorCallback(@[[NSNumber numberWithLong:error.code]]);
-    }
-}
-
 // TODO need to let them name their own datastore! else could conflict with other apps?
 RCT_EXPORT_METHOD(init: (NSString *)databaseUrl callback:(RCTResponseSenderBlock)callback)
 {
@@ -87,7 +48,7 @@ RCT_EXPORT_METHOD(init: (NSString *)databaseUrl callback:(RCTResponseSenderBlock
     
     NSURL *documentsDir = [[fileManager URLsForDirectory:NSDocumentDirectory
                                                inDomains:NSUserDomainMask] lastObject];
-    NSURL *storeURL = [documentsDir URLByAppendingPathComponent:@"cloudant-sync-datastore"];
+    NSURL *storeURL = [documentsDir URLByAppendingPathComponent:@"datastores"];
     NSString *path = [storeURL path];
     
     manager = [[CDTDatastoreManager alloc] initWithDirectory:path error:&error];
@@ -99,7 +60,7 @@ RCT_EXPORT_METHOD(init: (NSString *)databaseUrl callback:(RCTResponseSenderBlock
     }
     
     // TODO datastore name needs to be configurable
-    datastore = [manager datastoreNamed:@"react_native_sync_datastore" error:&error];
+    datastore = [manager datastoreNamed:@"rnsync_datastore" error:&error];
     
     if(error)
     {
@@ -111,39 +72,19 @@ RCT_EXPORT_METHOD(init: (NSString *)databaseUrl callback:(RCTResponseSenderBlock
     
     remoteDatabaseURL = [NSURL URLWithString:databaseUrl];
     
+    replicationManager = [[ReplicationManager alloc] initWithData:remoteDatabaseURL datastore:datastore replicatorFactory:replicatorFactory];
+    
     callback(@[[NSNull null]]);
 }
 
-RCT_EXPORT_METHOD(replicatePush: (RCTResponseSenderBlock)successCallback errorCallback: (RCTResponseSenderBlock)errrorCallback)
+RCT_EXPORT_METHOD(replicatePush: (RCTResponseSenderBlock)callback)
 {
-    replicatorDidCompleteCallback = successCallback;
-    replicatorDidErrorCallback = errrorCallback;
-    
-    // Replicate from the local to remote database
-    CDTPushReplication *pushReplication = [CDTPushReplication replicationWithSource:datastore
-                                                                             target:remoteDatabaseURL];
-    NSError *error;
-    
-    replicator = [replicatorFactory oneWay:pushReplication error:&error];
-    replicator.delegate = self;
-    
-    [replicator startWithError: &error];
+    [replicationManager push: callback];
 }
 
-RCT_EXPORT_METHOD(replicatePull: (RCTResponseSenderBlock)successCallback errorCallback: (RCTResponseSenderBlock)errrorCallback)
+RCT_EXPORT_METHOD(replicatePull: (RCTResponseSenderBlock)callback)
 {
-    replicatorDidCompleteCallback = successCallback;
-    replicatorDidErrorCallback = errrorCallback;
-    
-    CDTPullReplication *pullReplication = [CDTPullReplication replicationWithSource:remoteDatabaseURL
-                                                                             target:datastore];
-    
-    NSError *error;
-    
-    replicator = [replicatorFactory oneWay:pullReplication error:&error];
-    replicator.delegate = self;
-    
-    [replicator startWithError: &error];
+    [replicationManager pull: callback];
 }
 
 RCT_EXPORT_METHOD(create: body id:(NSString*)id callback:(RCTResponseSenderBlock)callback)
@@ -180,8 +121,8 @@ RCT_EXPORT_METHOD(create: body id:(NSString*)id callback:(RCTResponseSenderBlock
     {
         NSDictionary *dict = @{ @"id" : revision.docId, @"rev" : revision.revId, @"body" : revision.body };
         
-        NSArray *params = @[dict];
-        callback(@[[NSNull null], params]);
+        //NSArray *params = @[dict];
+        callback(@[[NSNull null], dict]);
     }
     else{
         callback(@[[NSNumber numberWithLong:error.code]]);
@@ -234,8 +175,8 @@ RCT_EXPORT_METHOD(retrieve: (NSString *)id callback:(RCTResponseSenderBlock)call
     {
         NSDictionary *dict = @{ @"id" : revision.docId, @"rev" : revision.revId, @"body" : revision.body };
         
-        NSArray *params = @[dict];
-        callback(@[[NSNull null], params]);
+        //NSArray *params = @[dict];
+        callback(@[[NSNull null], dict]);
     }
     else{
         callback(@[[NSNumber numberWithLong:error.code]]);
@@ -258,8 +199,8 @@ RCT_EXPORT_METHOD(update: (NSString *)id rev:(NSString *)rev  body:(NSDictionary
     
     if(!error)
     {
-        NSArray *params = @[dict];
-        callback(@[[NSNull null], params]);
+        //NSArray *params = @[dict];
+        callback(@[[NSNull null], dict]);
     }
     else{
         callback(@[[NSNumber numberWithLong:error.code]]);
@@ -269,30 +210,59 @@ RCT_EXPORT_METHOD(update: (NSString *)id rev:(NSString *)rev  body:(NSDictionary
 
 RCT_EXPORT_METHOD(delete: (NSString *)id callback:(RCTResponseSenderBlock)callback)
 {
+    if(!id)
+    {
+        //NSArray *params = @[[NSNumber numberWithBool:deleted]];
+        callback(@[@"called delete without specifying the id"]);
+        return;
+    }
+    
     NSError *error = nil;
     
     CDTDocumentRevision *retrieved = [datastore getDocumentWithId:id error:&error];
     
-    BOOL deleted = [datastore deleteDocumentFromRevision:retrieved
-                                                   error:&error];
+    [datastore deleteDocumentFromRevision:retrieved
+                                    error:&error];
     if(!error)
     {
-        NSArray *params = @[[NSNumber numberWithBool:deleted]];
-        callback(@[[NSNull null], params]);
+        //NSArray *params = @[[NSNumber numberWithBool:deleted]];
+        callback(@[[NSNull null]]);
     }
     else{
         callback(@[[NSNumber numberWithLong:error.code]]);
     }
 }
 
+RCT_EXPORT_METHOD(deleteDatastore: (RCTResponseSenderBlock)callback)
+{
+    NSError *error = nil;
+    
+    BOOL deleted = [manager deleteDatastoreNamed:@"rnsync_datastore" error: &error];
+    
+    if(!error)
+    {
+        //NSArray *params = @[[NSNumber numberWithBool:deleted]];
+        callback(@[[NSNull null], [NSNumber numberWithBool:deleted]]);
+    }
+    else{
+        callback(@[[NSNumber numberWithLong:error.code]]);
+    }
+}
+
+
 // TODO the results of the query could be huge (run out of memory huge).  Need param for how many items
 // to return and paging to get the rest
-RCT_EXPORT_METHOD(find: (NSDictionary *)query callback:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(find: (NSDictionary *)query fields:(NSArray *)fields callback:(RCTResponseSenderBlock)callback)
 {
     // TODO waste to new up resultList for every call
     NSMutableArray* resultList = [[NSMutableArray alloc] init];
     
-    CDTQResultSet *result = [datastore find:query];
+    CDTQResultSet *result = [datastore find:query
+                                       skip:0
+                                      limit:0
+                                     fields:fields
+                                       sort:nil];
+    
     [result enumerateObjectsUsingBlock:^(CDTDocumentRevision *rev, NSUInteger idx, BOOL *stop)
      {
          NSDictionary *dict = @{ @"id" : rev.docId, @"rev" : rev.revId, @"body" : rev.body };
@@ -300,8 +270,8 @@ RCT_EXPORT_METHOD(find: (NSDictionary *)query callback:(RCTResponseSenderBlock)c
          [resultList addObject: dict];
      }];
     
-    NSArray *params = @[resultList];
-    callback(@[[NSNull null], params]);
+    //NSArray *params = @[resultList];
+    callback(@[[NSNull null], resultList]);
 }
 
 @end

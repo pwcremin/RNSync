@@ -7,7 +7,6 @@
 //
 
 #import "RCTBridgeModule.h"
-#import "CloudantSync.h"
 
-@interface RNSync : NSObject <RCTBridgeModule, CDTReplicatorDelegate>
+@interface RNSync : NSObject <RCTBridgeModule>
 @end
