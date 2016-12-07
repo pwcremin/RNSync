@@ -37,6 +37,7 @@ react-native link rnsync
 ## Udates
  * 12/7 - 
    * Added rnsyncStorage so that RNSync can be used with redux-persist
+   * Added rnsync.replicateSync() for doing both a push and a pull 
    * Fixed ios issue with doing multiple replications at the same time (no longer an issue)
  * 11/16 - 
    * Added Android support
@@ -162,6 +163,10 @@ Pull changes from the remote database to your local
 rnsync.replicatePull( error => console.log(error) );
 ```
 
+Do both a push and a pull
+```javascript
+rnsync.replicateSync( error => console.log(error) );
+```
 #### Find
 
 Query for documents.  For more details on the query semantics please see the [Cloudant query documentation](https://github.com/cloudant/CDTDatastore/blob/master/doc/query.md)
