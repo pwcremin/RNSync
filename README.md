@@ -35,6 +35,9 @@ react-native link rnsync
 ```
 
 ## Udates
+ * 12/7 - 
+   * Added rnsyncStorage so that RNSync can be used with redux-persist
+   * Fixed ios issue with doing multiple replications at the same time (no longer an issue)
  * 11/16 - 
    * Added Android support
    * Both pull and push replication are now supported (the replicate function has been replaced with replicatePull and replicatePush)
@@ -58,7 +61,7 @@ To avoid exposing credentials create a web service to authenticate users and set
 Please refer to cloudantApiKeyGenerator/app.js for an example of how to securely create the database and get your api keys (for Cloudant)
  
 ```javascript
-var rnsync = require('rnsync');
+import rnsync from 'rnsync';
 
 // init with your cloudant or couchDB database
 var dbUrl = "https://user:pass@xxxxx";
@@ -171,8 +174,35 @@ rnsync.find(query, function(docs)
   console.log('found ' + docs.length);
 });
 ```
-## Known Issues
-- Calling replicate() before a previous replication has completed will error.  Caused by overwritting sucess/fail callbacks
+
+## Usage with redux-persist
+
+```javascript
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import reducer from './redux/reducers/index'
+
+
+import {persistStore, autoRehydrate} from 'redux-persist'
+import rnsync, {rnsyncStorage} from 'rnsync'
+
+
+let dbUrl = "https://f8440070-46e5-4fcb-9913-7bc7c279754f-bluemix:10bba7a23fb6a1ed8c55082939eaf4916fbc8d463cf4659c2dc76dbbca1e847e@f8440070-46e5-4fcb-9913-7bc7c279754f-bluemix.cloudant.com";
+let dbName = "rnsync";
+
+rnsync.init(dbUrl, dbName, error => console.log(error) );
+
+const store = createStore(reducer, undefined, autoRehydrate());
+
+persistStore(store, {storage: rnsyncStorage});
+```
+
+If you want to do replication before loading the store then:
+```javascript
+rnsync.replicateSync().then(() => persistStore(store, {storage: rnsyncStorage}));
+```
+
+It is up to you to decide when and where to do replication.  Later I will add the ability automatically do a replication push when data changes (from a whitelist you pass to rnsyncStorage.)
 
 ## Author
 
