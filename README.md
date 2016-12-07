@@ -187,7 +187,7 @@ import {persistStore, autoRehydrate} from 'redux-persist'
 import rnsync, {rnsyncStorage} from 'rnsync'
 
 
-let dbUrl = "https://f8440070-46e5-4fcb-9913-7bc7c279754f-bluemix:10bba7a23fb6a1ed8c55082939eaf4916fbc8d463cf4659c2dc76dbbca1e847e@f8440070-46e5-4fcb-9913-7bc7c279754f-bluemix.cloudant.com";
+let dbUrl = "https://xxx:xxx-bluemix.cloudant.com";
 let dbName = "rnsync";
 
 rnsync.init(dbUrl, dbName, error => console.log(error) );
