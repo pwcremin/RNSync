@@ -35,6 +35,10 @@ react-native link rnsync
 ```
 
 ## Udates
+ * 12/7 - 
+   * Added rnsyncStorage so that RNSync can be used with redux-persist
+   * Added rnsync.replicateSync() for doing both a push and a pull 
+   * Fixed ios issue with doing multiple replications at the same time (no longer an issue)
  * 11/16 - 
    * Added Android support
    * Both pull and push replication are now supported (the replicate function has been replaced with replicatePull and replicatePush)
@@ -58,7 +62,7 @@ To avoid exposing credentials create a web service to authenticate users and set
 Please refer to cloudantApiKeyGenerator/app.js for an example of how to securely create the database and get your api keys (for Cloudant)
  
 ```javascript
-var rnsync = require('rnsync');
+import rnsync from 'rnsync';
 
 // init with your cloudant or couchDB database
 var dbUrl = "https://user:pass@xxxxx";
@@ -159,6 +163,10 @@ Pull changes from the remote database to your local
 rnsync.replicatePull( error => console.log(error) );
 ```
 
+Do both a push and a pull
+```javascript
+rnsync.replicateSync( error => console.log(error) );
+```
 #### Find
 
 Query for documents.  For more details on the query semantics please see the [Cloudant query documentation](https://github.com/cloudant/CDTDatastore/blob/master/doc/query.md)
@@ -171,8 +179,35 @@ rnsync.find(query, function(docs)
   console.log('found ' + docs.length);
 });
 ```
-## Known Issues
-- Calling replicate() before a previous replication has completed will error.  Caused by overwritting sucess/fail callbacks
+
+## Usage with redux-persist
+
+```javascript
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import reducer from './redux/reducers/index'
+
+
+import {persistStore, autoRehydrate} from 'redux-persist'
+import rnsync, {rnsyncStorage} from 'rnsync'
+
+
+let dbUrl = "https://xxx:xxx-bluemix.cloudant.com";
+let dbName = "rnsync";
+
+rnsync.init(dbUrl, dbName, error => console.log(error) );
+
+const store = createStore(reducer, undefined, autoRehydrate());
+
+persistStore(store, {storage: rnsyncStorage});
+```
+
+If you want to do replication before loading the store then:
+```javascript
+rnsync.replicateSync().then(() => persistStore(store, {storage: rnsyncStorage}));
+```
+
+It is up to you to decide when and where to do replication.  Later I will add the ability automatically do a replication push when data changes (from a whitelist you pass to rnsyncStorage.)
 
 ## Author
 
