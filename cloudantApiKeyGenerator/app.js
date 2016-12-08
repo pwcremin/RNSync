@@ -74,7 +74,7 @@ function createDatabase( data )
     return request( { url: url, method: 'PUT' } )
         .then( function ( response )
         {
-            var DB_CREATION_SUCCESS = 202;
+            var DB_CREATION_SUCCESS = 201;
             var DATABASE_EXISTS = 412;
 
             if ( response.statusCode != DB_CREATION_SUCCESS && response.statusCode != DATABASE_EXISTS )
