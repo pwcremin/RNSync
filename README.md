@@ -61,7 +61,7 @@ To avoid exposing credentials create a web service to authenticate users and set
 - Grant access to the new database for the new device (e.g., via [API keys on Cloudant](https://cloudant.com/for-developers/faq/auth/) or the _users database in CouchDB).
 - Return the database URL and credentials to the device.
 
-Please refer to cloudantApiKeyGenerator/app.js for an example of how to securely create the database and get your api keys (for Cloudant)
+Please refer to [cloudantApiKeyGenerator](cloudantApiKeyGenerator) for an example of how to securely create the database and get your api keys (for Cloudant)
  
 ```javascript
 import rnsync from 'rnsync';
