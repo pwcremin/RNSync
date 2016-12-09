@@ -90,3 +90,8 @@ const store = createStore(reducer, undefined, autoRehydrate());
 
 persistStore(store, {storage: rnsyncStorage});
 ```
+If you want to do replication before loading the store then:
+
+```javascript
+rnsync.replicateSync().then(() => persistStore(store, {storage: rnsyncStorage}));
+```
