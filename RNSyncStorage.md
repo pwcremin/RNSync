@@ -68,3 +68,25 @@ rnsyncStorage.getAllKeys((error, keys) =>
   console.log(JSON.stringify(keys));
 }
 ```
+
+
+## Usage with redux-persist
+
+```javascript
+import { createStore } from 'redux'
+import reducer from './redux/reducers/index'
+
+
+import {persistStore, autoRehydrate} from 'redux-persist'
+import rnsync, {rnsyncStorage} from 'rnsync'
+
+
+let dbUrl = "https://xxx:xxx-bluemix.cloudant.com";
+let dbName = "rnsync";
+
+rnsync.init(dbUrl, dbName, error => console.log(error) );
+
+const store = createStore(reducer, undefined, autoRehydrate());
+
+persistStore(store, {storage: rnsyncStorage});
+```
