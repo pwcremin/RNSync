@@ -183,7 +183,6 @@ rnsync.find(query, function(docs)
 ## Usage with redux-persist
 
 ```javascript
-import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import reducer from './redux/reducers/index'
 
