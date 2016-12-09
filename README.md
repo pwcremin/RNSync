@@ -10,7 +10,7 @@ RNSync is a wrapper for [Cloudant Sync](https://github.com/cloudant/CDTDatastore
 
 Create an account on [IBM Bluemix](http://bit.ly/2fYtrCz) and get your own instance of [Cloudant](http://bit.ly/2eH8lbY) (where a free tier is available).
 
-New! RNSync now works with redux-perist.  Please read the [RNSyncStorage doc](RNSyncStorage.md) for more info.  You may also prefer the simplified API.
+**New!** RNSync now works with redux-perist.  Please read the [RNSyncStorage doc](RNSyncStorage.md) for more info.  You may also prefer the simplified API.
 
 ## Installation
 
