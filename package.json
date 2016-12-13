@@ -1,6 +1,6 @@
 {
   "name": "rnsync",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Stop making http CRUD calls and instead work with a local NoSQL database that you can replicate to your remote database and keep a user's data synced across multiple devices.",
   "main": "index.js",
   "repository": {
