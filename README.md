@@ -37,7 +37,7 @@ react-native link rnsync
 ```
 
 ## Udates
- * 1/15 - update for 0.40 and fixed promisfy issue
+ * 1/15 - v2.0.0 update for 0.40 and fixed promisfy issue
  * 12/7 - 
    * Added rnsyncStorage so that RNSync can be used with redux-persist
    * Added rnsync.replicateSync() for doing both a push and a pull 
