@@ -73,7 +73,7 @@ var dbName = "name_xxxx";
 rnsync.init(dbUrl, dbName, function(error)
 {
   console.log(error);
-}
+});
 ```
 
 #### Create
@@ -87,18 +87,18 @@ var id = "whatever";
 rnsync.create(object, id, function(error, doc)
 {
   console.log(doc.id);
-}
+});
 
 rnsync.create({name: 'jon'},  function(error, doc)
 {
   console.log(doc.id);
-}
+});
 
 // note: create will return an error if the id already exist
 rnsync.create('user',  function(error, doc)
 {
   console.log(doc.id);
-}
+});
 
 ```
 
@@ -110,7 +110,7 @@ Returns the doc with the specified id.  It will create the doc if it does not al
 rnsync.findOrCreate('user',  function(error, doc)
 {
   console.log(doc.id);
-}
+});
 ```
 
 #### Retrieve
@@ -124,7 +124,7 @@ var id = "whatever";
 rnsync.retrieve(id, function(error, doc)
 {
   console.log(JSON.stringify(doc.body));
-}
+});
 ```
 
 #### Update
@@ -138,7 +138,7 @@ doc.body.somechange = "hi mom";
 rnsync.update(doc.id, doc.rev, doc.body, function(error, doc)
 {
   console.log(JSON.stringify(doc.body));
-}
+});
 ```
 
 #### Delete
@@ -148,7 +148,7 @@ rnsync.update(doc.id, doc.rev, doc.body, function(error, doc)
 rnsync.delete(doc.id, function(error)
 {
   console.log(error);
-}
+});
 ```
 
 #### Replicate
