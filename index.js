@@ -1,8 +1,6 @@
 var rnsyncModule = require( 'react-native' ).NativeModules.RNSync;
 import {Platform} from 'react-native';
 
-const promisify = require("es6-promisify");
-
 const noop = () =>
 {
 };
