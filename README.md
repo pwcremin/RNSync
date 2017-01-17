@@ -13,7 +13,7 @@ You can get an instance of [Cloudant](http://bit.ly/2eH8lbY) by creating an acco
 **New!** RNSync now works with [Redux Persist](https://github.com/rt2zz/redux-persist).  Please read the [RNSyncStorage doc](RNSyncStorage.md) for more info.  You may also prefer the simplified API.
 
 ## Udates
- * 1/16 - ok some changes to really get this working with 0.40.  Please read installation instructions as they have changed
+ * 1/16 - ok some changes to really get this working with 0.40.  Please read iOS installation instructions as they have changed
  * 1/15 - v2.0.0 update for 0.40 and fixed promisfy issue
  * 12/7 - 
    * Added rnsyncStorage so that RNSync can be used with redux-persist
