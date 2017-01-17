@@ -46,7 +46,7 @@ Link and Pod install
 
 ```ruby
 react-native link rnsync
-ios/pod install
+cd ios;pod install
 ```
 ### Android
 
