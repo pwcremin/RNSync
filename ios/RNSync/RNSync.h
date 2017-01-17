@@ -6,7 +6,7 @@
 //  Copyright © 2016 Patrick cremin. All rights reserved.
 //
 
-#import "RCTBridgeModule.h"
+#import <React/RCTBridgeModule.h>
 
 @interface RNSync : NSObject <RCTBridgeModule>
 @end

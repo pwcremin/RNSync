@@ -6,7 +6,7 @@
 //
 //
 #import "CloudantSync.h"
-#import "RCTEventDispatcher.h"
+#import <React/RCTEventDispatcher.h>
 
 @class ReplicationManager;
 

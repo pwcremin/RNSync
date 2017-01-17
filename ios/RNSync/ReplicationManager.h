@@ -10,7 +10,7 @@
 #define ReplicationManager_h
 
 #import "CloudantSync.h"
-#import "RCTEventDispatcher.h"
+#import <React/RCTEventDispatcher.h>
 
 @class Replicator;
 
