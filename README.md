@@ -10,6 +10,8 @@ RNSync is a wrapper for [Cloudant Sync](https://github.com/cloudant/CDTDatastore
 
 You can get an instance of [Cloudant](http://bit.ly/2eH8lbY) by creating an account on [IBM Bluemix](http://bit.ly/2fYtrCz).
 
+RNSync only supports ReactNative > 0.40
+
 **New!** RNSync now works with [Redux Persist](https://github.com/rt2zz/redux-persist).  Please read the [RNSyncStorage doc](RNSyncStorage.md) for more info.  You may also prefer the simplified API.
 
 ## Udates
