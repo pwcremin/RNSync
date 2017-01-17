@@ -12,31 +12,8 @@ You can get an instance of [Cloudant](http://bit.ly/2eH8lbY) by creating an acco
 
 **New!** RNSync now works with [Redux Persist](https://github.com/rt2zz/redux-persist).  Please read the [RNSyncStorage doc](RNSyncStorage.md) for more info.  You may also prefer the simplified API.
 
-## Installation
-
-Install with npm
-```ruby
-npm install --save rnsync
-```
-
-### iOS
-
-Edit your Podfile (find help with setting up CocoaPods [here](https://guides.cocoapods.org/using/using-cocoapods.html). Hint: its easy)
-```ruby
-pod 'rnsync', :path => '../node_modules/rnsync/ios'
-```
-
-Pod install
-```ruby
-pod install
-```
-### Android
-
-```ruby
-react-native link rnsync
-```
-
 ## Udates
+ * 1/16 - ok some changes to really get this working with 0.40.  Please read installation instructions as they have changed
  * 1/15 - v2.0.0 update for 0.40 and fixed promisfy issue
  * 12/7 - 
    * Added rnsyncStorage so that RNSync can be used with redux-persist
@@ -49,6 +26,35 @@ react-native link rnsync
  * 3/28 - all functions now return promises
  * 3/28 - init() will no longer create the database for you.  Please refer to cloudantApiKeyGenerator/app.js for an example of how to securely create the database and get your api keys (for Cloudant)
  
+ 
+## Installation
+
+Install with npm
+```ruby
+npm install --save rnsync
+```
+
+### iOS
+
+Add CDTDatastore to your Podfile
+
+```ruby
+pod 'CDTDatastore'
+```
+
+Link and Pod install
+
+```ruby
+react-native link rnsync
+ios/pod install
+```
+### Android
+
+```ruby
+react-native link rnsync
+```
+
+
 ## Usage
 
 #### Init
