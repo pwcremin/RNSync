@@ -15,6 +15,7 @@ RNSync only supports ReactNative > 0.40
 **New!** RNSync now works with [Redux Persist](https://github.com/rt2zz/redux-persist).  Please read the [RNSyncStorage doc](RNSyncStorage.md) for more info.  You may also prefer the simplified API.
 
 ## Udates
+ * 1/17 - You can now use [rnsync_key_generator](https://github.com/pwcremin/rnsync_key_generator) to easily add a route to your Express server to handle the creation of your device database and credentials
  * 1/16 - ok some changes to really get this working with 0.40.  Please read iOS installation instructions as they have changed
  * 1/15 - v2.0.0 update for 0.40 and fixed promisfy issue
  * 12/7 - 
@@ -70,7 +71,7 @@ To avoid exposing credentials create a web service to authenticate users and set
 - Grant access to the new database for the new device (e.g., via [API keys on Cloudant](https://cloudant.com/for-developers/faq/auth/) or the _users database in CouchDB).
 - Return the database URL and credentials to the device.
 
-Please refer to [cloudantApiKeyGenerator](cloudantApiKeyGenerator) for an example of how to securely create the database and get your api keys (for Cloudant)
+You can use the [rnsync_key_generator](https://github.com/pwcremin/rnsync_key_generator) package with your Express server to easily handle database and credentials creation. Also refer to [cloudantApiKeyGenerator](cloudantApiKeyGenerator) for an example of adding this functionality to your Express server if you do not wish to use rnsync_key_generator.
  
 ```javascript
 import rnsync from 'rnsync';
