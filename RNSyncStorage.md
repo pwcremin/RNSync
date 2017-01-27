@@ -15,7 +15,6 @@ npm install --save rnsync
 
 ### iOS
 
-Edit your Podfile (find help with setting up CocoaPods [here](https://guides.cocoapods.org/using/using-cocoapods.html). Hint: its easy)
 ```ruby
 react-native link rnsync
 ```
