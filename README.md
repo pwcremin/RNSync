@@ -12,7 +12,7 @@ RNSync only supports ReactNative > 0.40
 
 **New!** RNSync now works with [Redux Persist](https://github.com/rt2zz/redux-persist).  Please read the [RNSyncStorage doc](RNSyncStorage.md) for more info.  You may also prefer the simplified API.
 
-## Udates
+## Updates
  * 1/27 - You can now use [rnsync_key_generator](https://github.com/pwcremin/rnsync_key_generator) to easily add a route to your Express server to handle the creation of your device database and credentials
  * 1/16 - ok some changes to really get this working with 0.40.  Please read iOS installation instructions as they have changed
  * 1/15 - v2.0.0 update for 0.40 and fixed promisfy issue
