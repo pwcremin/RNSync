@@ -1,4 +1,5 @@
 # RNSync
+[![npm version](https://badge.fury.io/js/rnsync.svg)](https://badge.fury.io/js/rnsync)
 
 ## About
 
@@ -10,22 +11,7 @@ You can get an instance of [Cloudant](http://bit.ly/2eH8lbY) by creating an acco
 
 RNSync only supports ReactNative > 0.40
 
-**New!** RNSync now works with [Redux Persist](https://github.com/rt2zz/redux-persist).  Please read the [RNSyncStorage doc](RNSyncStorage.md) for more info.  You may also prefer the simplified API.
-
-## Updates
- * 1/27 - You can now use [rnsync_key_generator](https://github.com/pwcremin/rnsync_key_generator) to easily add a route to your Express server to handle the creation of your device database and credentials
- * 1/16 - ok some changes to really get this working with 0.40.  Please read iOS installation instructions as they have changed
- * 1/15 - v2.0.0 update for 0.40 and fixed promisfy issue
- * 12/7 - 
-   * Added rnsyncStorage so that RNSync can be used with redux-persist
-   * Added rnsync.replicateSync() for doing both a push and a pull 
-   * Fixed ios issue with doing multiple replications at the same time (no longer an issue)
- * 11/16 - 
-   * Added Android support
-   * Both pull and push replication are now supported (the replicate function has been replaced with replicatePull and replicatePush)
-   * Removed 'addAttachment' until its functionality is fully implemented
- * 3/28 - all functions now return promises
- * 3/28 - init() will no longer create the database for you.  Please refer to cloudantApiKeyGenerator/app.js for an example of how to securely create the database and get your api keys (for Cloudant)
+RNSync works with [Redux Persist](https://github.com/rt2zz/redux-persist).  Please read the [RNSyncStorage doc](RNSyncStorage.md) for more info.  You may also prefer the simplified API.
  
  
 ## Installation
