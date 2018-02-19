@@ -15,5 +15,8 @@
     "cocoapod"
   ],
   "author": "Patrick Cremin <pwcremin@gmail.com> (https://github.com/pwcremin)",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "react-native": "^0.40"
+  }
 }
