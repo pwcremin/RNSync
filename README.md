@@ -1,4 +1,5 @@
 # RNSync
+[![npm version](https://badge.fury.io/js/rnsync.svg)](https://badge.fury.io/js/rnsync)
 
 ## About
 
