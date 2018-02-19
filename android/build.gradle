@@ -1,9 +1,16 @@
+buildscript {
+    repositories {
+        google()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.1'
+    }
+}
+
 apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
-
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 22
@@ -19,13 +26,23 @@ android {
     }
 }
 
+allprojects {
+    repositories {
+        maven {
+            // All of React Native (JS, Android binaries) is installed from npm
+            url "$rootDir/../node_modules/react-native/android"
+        }
+    }
+}
+
 repositories {
     mavenLocal()
     mavenCentral()
+    google()
 }
 
 dependencies {
     compile 'com.facebook.react:react-native:+'
-    compile group: 'com.cloudant', name: 'cloudant-sync-datastore-android', version:'latest.release'
+    compile group: 'com.cloudant', name: 'cloudant-sync-datastore-android', version:'2.+'
     compile 'com.google.code.gson:gson:2.3.1'
 }
