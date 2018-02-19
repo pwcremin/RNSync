@@ -1,5 +1,6 @@
 package com.patrickcremin.react;
 
+import com.cloudant.sync.query.QueryException;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -11,22 +12,18 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReadableNativeMap;
 
-import com.cloudant.sync.query.IndexManager;
 import com.cloudant.sync.query.QueryResult;
-import com.cloudant.sync.datastore.Datastore;
-import com.cloudant.sync.datastore.DatastoreManager;
-import com.cloudant.sync.datastore.DocumentBodyFactory;
+import com.cloudant.sync.documentstore.DocumentStore;
+import com.cloudant.sync.documentstore.DocumentBodyFactory;
 
-import com.cloudant.sync.datastore.DocumentRevision;
-import com.cloudant.sync.datastore.UnsavedFileAttachment;
+import com.cloudant.sync.documentstore.DocumentRevision;
+import com.cloudant.sync.documentstore.UnsavedFileAttachment;
 import com.cloudant.sync.event.Subscribe;
-import com.cloudant.sync.notifications.ReplicationCompleted;
-import com.cloudant.sync.notifications.ReplicationErrored;
-import com.cloudant.sync.replication.ErrorInfo;
+import com.cloudant.sync.event.notifications.ReplicationCompleted;
+import com.cloudant.sync.event.notifications.ReplicationErrored;
 import com.cloudant.sync.replication.Replicator;
 import com.cloudant.sync.replication.ReplicatorBuilder;
 import com.facebook.react.bridge.WritableNativeArray;
-import com.facebook.react.bridge.WritableNativeMap;
 
 import com.google.gson.Gson;
 
@@ -37,7 +34,6 @@ import java.io.File;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -45,9 +41,9 @@ import java.util.concurrent.CountDownLatch;
 class Listener {
 
     private final CountDownLatch latch;
-    public ErrorInfo error = null;
-    public int documentsReplicated;
-    public int batchesReplicated;
+    Throwable error = null;
+    int documentsReplicated;
+    int batchesReplicated;
 
     Listener(CountDownLatch latch) {
         this.latch = latch;
@@ -69,17 +65,11 @@ class Listener {
 
 public class RNSyncModule extends ReactContextBaseJavaModule {
 
-    private DatastoreManager manager;
-    private Replicator replicator;
     private URI uri;
-    private Datastore ds;
-    private IndexManager im;
+    private DocumentStore ds;
 
-    public RNSyncModule(ReactApplicationContext reactContext) {
+    RNSyncModule(ReactApplicationContext reactContext) {
         super(reactContext);
-
-        File path = reactContext.getApplicationContext().getDir("datastores", Context.MODE_PRIVATE);
-        manager = new DatastoreManager(path.getAbsolutePath());
     }
 
     @Override
@@ -90,11 +80,15 @@ public class RNSyncModule extends ReactContextBaseJavaModule {
     // TODO let them name the datastore
     @ReactMethod
     public void init(String databaseUrl, Callback callback) {
+        String datastoreDir = "datastores";
+        String datastoreName = "my_datastore";
 
         try {
+            File path = super.getReactApplicationContext()
+                    .getApplicationContext()
+                    .getDir(datastoreDir, Context.MODE_PRIVATE);
+            ds = DocumentStore.getInstance(new File(path, datastoreName));
             uri = new URI(databaseUrl);
-            ds = manager.openDatastore("my_datastore");
-            im = new IndexManager(ds);
         }
         catch (Exception e)
         {
@@ -125,7 +119,7 @@ public class RNSyncModule extends ReactContextBaseJavaModule {
             latch.await();
 
             if (replicator.getState() != Replicator.State.COMPLETE) {
-                callback.invoke(listener.error.getException().getMessage());
+                callback.invoke(listener.error.getMessage());
             } else {
                 callback.invoke(null, String.format("Replicated %d documents in %d batches",
                         listener.documentsReplicated, listener.batchesReplicated));
@@ -159,7 +153,7 @@ public class RNSyncModule extends ReactContextBaseJavaModule {
             replicator.getEventBus().unregister(listener);
 
             if (replicator.getState() != Replicator.State.COMPLETE) {
-                callback.invoke(listener.error.getException().getMessage());
+                callback.invoke(listener.error.getMessage());
             } else {
                 callback.invoke(null, String.format("Replicated %d documents in %d batches",
                         listener.documentsReplicated, listener.batchesReplicated));
@@ -197,16 +191,15 @@ public class RNSyncModule extends ReactContextBaseJavaModule {
         }
 
         try {
-            DocumentRevision saved = ds.createDocumentFromRevision(revision);
+            DocumentRevision saved = ds.database().create(revision);
 
-            WritableMap doc = this.createWriteableMapFromHashMap(this.createDoc(saved));
+            WritableMap doc = this.createWritableMapFromHashMap(this.createDoc(saved));
 
             callback.invoke(null, doc);
         }
         catch (Exception e)
         {
             callback.invoke(e.getMessage());
-            return;
         }
     }
 
@@ -215,37 +208,36 @@ public class RNSyncModule extends ReactContextBaseJavaModule {
     public void addAttachment(String id, String name, String path, String type, Callback callback) {
 
         try{
-            DocumentRevision revision = ds.getDocument(id);
+            DocumentRevision revision = ds.database().read(id);
 
             // Add an attachment -- binary data like a JPEG
+            File f = new File(path);
             UnsavedFileAttachment att1 =
-                    new UnsavedFileAttachment(new File(path), type);
+                    new UnsavedFileAttachment(f, type);
 
-            revision.getAttachments().put(att1.name, att1);
-            DocumentRevision updated = ds.updateDocumentFromRevision(revision);
+            revision.getAttachments().put(f.getName(), att1);
+            DocumentRevision updated = ds.database().update(revision);
 
-            WritableMap doc = this.createWriteableMapFromHashMap(this.createDoc(updated));
+            WritableMap doc = this.createWritableMapFromHashMap(this.createDoc(updated));
 
             callback.invoke(null, doc );
         }
         catch (Exception e) {
             callback.invoke(e.getMessage());
-            return;
         }
     }
 
     @ReactMethod
     public void retrieve(String id, Callback callback) {
         try{
-            DocumentRevision revision = ds.getDocument(id);
+            DocumentRevision revision = ds.database().read(id);
 
-            WritableMap doc = this.createWriteableMapFromHashMap(this.createDoc(revision));
+            WritableMap doc = this.createWritableMapFromHashMap(this.createDoc(revision));
 
             callback.invoke(null, doc);
         }
         catch (Exception e) {
             callback.invoke(e.getMessage());
-            return;
         }
     }
 
@@ -253,15 +245,15 @@ public class RNSyncModule extends ReactContextBaseJavaModule {
     public void update(String id, String rev, ReadableMap body, Callback callback) {
 
         try {
-            DocumentRevision revision = ds.getDocument(id);
+            DocumentRevision revision = ds.database().read(id);
 
             ReadableNativeMap nativeBody = (ReadableNativeMap) body;
 
             revision.setBody(DocumentBodyFactory.create(nativeBody.toHashMap()));
 
-            DocumentRevision updated = ds.updateDocumentFromRevision(revision);
+            DocumentRevision updated = ds.database().update(revision);
 
-            WritableMap doc = this.createWriteableMapFromHashMap(this.createDoc(updated));
+            WritableMap doc = this.createWritableMapFromHashMap(this.createDoc(updated));
 
             callback.invoke(null, doc);
         }
@@ -275,51 +267,50 @@ public class RNSyncModule extends ReactContextBaseJavaModule {
     public void delete(String id, Callback callback) {
 
         try {
-            DocumentRevision revision = ds.getDocument(id);
+            DocumentRevision revision = ds.database().read(id);
 
-            ds.deleteDocumentFromRevision(revision);
+            ds.database().delete(revision);
 
             callback.invoke();
         }
         catch (Exception e)
         {
             callback.invoke(e.getMessage());
-            return;
         }
     }
 
     @ReactMethod
     public void find(ReadableMap query, ReadableArray fields, Callback callback) {
 
-        ReadableNativeMap nativeQuery = (ReadableNativeMap) query;
+        try {
+            ReadableNativeMap nativeQuery = (ReadableNativeMap) query;
 
-        QueryResult result;
+            QueryResult result;
 
-        if(fields == null)
-        {
-            result = im.find(nativeQuery.toHashMap(), 0, 0, null, null);
-        }
-        else
-        {
-            List<String> fieldslist = new ArrayList<>();
-            for (int i = 0; i < fields.size(); i++) {
-                fieldslist.add(fields.getString(i));
+            if (fields == null) {
+                result = this.ds.query().find(nativeQuery.toHashMap(), 0, 0, null, null);
+            } else {
+                List<String> fieldsList = new ArrayList<>();
+                for (int i = 0; i < fields.size(); i++) {
+                    fieldsList.add(fields.getString(i));
+                }
+
+                result = this.ds.query().find(nativeQuery.toHashMap(), 0, 0, fieldsList, null);
             }
 
-            result = im.find(nativeQuery.toHashMap(), 0, 0, fieldslist, null);
+            WritableArray docs = new WritableNativeArray();
+
+            for (DocumentRevision revision : result) {
+
+                String jsonString = new Gson().toJson(this.createDoc(revision));
+
+                docs.pushString(jsonString);
+            }
+
+            callback.invoke(null, docs);
+        } catch (QueryException e) {
+            callback.invoke(e.getMessage());
         }
-
-
-        WritableArray docs = new WritableNativeArray();
-
-        for (DocumentRevision revision : result) {
-
-            String jsonString = new Gson().toJson(this.createDoc(revision));
-
-            docs.pushString(jsonString);
-        }
-
-        callback.invoke(null, docs);
     }
 
     private HashMap<String, Object> createDoc(DocumentRevision revision)
@@ -346,7 +337,7 @@ public class RNSyncModule extends ReactContextBaseJavaModule {
         return doc;
     }
 
-    private WritableMap createWriteableMapFromHashMap(HashMap<String, Object> doc) {
+    private WritableMap createWritableMapFromHashMap(HashMap<String, Object> doc) {
 
         WritableMap data = Arguments.createMap();
 
@@ -373,7 +364,7 @@ public class RNSyncModule extends ReactContextBaseJavaModule {
                     data.putMap(key, (WritableMap) value);
                     break;
                 case "java.util.HashMap":
-                    data.putMap(key, this.createWriteableMapFromHashMap((HashMap<String, Object>)value));
+                    data.putMap(key, this.createWritableMapFromHashMap((HashMap<String, Object>)value));
                     break;
                 case "com.facebook.react.bridge.WritableNativeArray":
                     data.putArray(key, (WritableArray)value);
