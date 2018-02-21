@@ -1,6 +1,8 @@
 # RNSync
 [![npm version](https://badge.fury.io/js/rnsync.svg)](https://badge.fury.io/js/rnsync)
 
+[![Join the chat at https://gitter.im/pwcremin/RNSync](https://badges.gitter.im/pwcremin/RNSync.svg)](https://gitter.im/pwcremin/RNSync?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## About
 
 RNSync is a React Native module that allows you to work with your Cloudant or CouchDB database locally (on the mobile device) and replicate to the remote database when needed.
