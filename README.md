@@ -70,6 +70,19 @@ rnsync.init(dbUrl, dbName, function(error)
 });
 ```
 
+To create multiple datastores, import the RNSync class (this will be the default in the next major release)
+```javascript
+import {RNSync} from 'rnsync'
+
+let store1 = new RNSync(dbUrl, dbName)
+await store1.init()
+store1.create({x:10}
+
+let store2 = new RNSync(dbUrl, dbName2)
+await store2.init()
+store2.create({x:11}
+```
+
 #### Create
 
 Both the object and the id are optional.  If you leave out the object it will create a new doc that is empty.  If you leave
