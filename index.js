@@ -1,13 +1,13 @@
 var rnsyncModule = require( 'react-native' ).NativeModules.RNSync;
-import {Platform} from 'react-native';
+import { Platform } from 'react-native';
 
 const noop = () =>
 {
 };
 
-class RNSyncStorage {
-
-    setItem ( key, value, callback )
+class RNSyncStorage
+{
+    setItem( key, value, callback )
     {
         callback = callback || noop;
 
@@ -16,7 +16,7 @@ class RNSyncStorage {
 
         rnsyncModule.retrieve( key, ( error, doc ) =>
         {
-            if(error)     // should be 404
+            if ( error )     // should be 404
             {
                 rnsyncModule.create( body, key, callback );
             }
@@ -27,7 +27,7 @@ class RNSyncStorage {
         } );
     }
 
-    getItem ( key, callback )
+    getItem( key, callback )
     {
         callback = callback || noop;
 
@@ -35,30 +35,30 @@ class RNSyncStorage {
         {
             let item = error ? null : doc.body.value;
 
-            callback(error, item);
+            callback( error, item );
         } );
 
     }
 
-    removeItem ( key, callback )
+    removeItem( key, callback )
     {
         callback = callback || noop;
 
         rnsyncModule.delete( key, callback );
     }
 
-    getAllKeys ( callback )
+    getAllKeys( callback )
     {
         callback = callback || noop;
 
         // using _id as the field isn't right (since the body doesn't contain an _id) but
         // it keeps the body from returning since the field doesn't exist
         // TODO try ' '?
-        rnsyncModule.find( {'_id': {'$exists': true } }, ['_id'], ( error, docs ) =>
+        rnsyncModule.find( { '_id': { '$exists': true } }, [ '_id' ], ( error, docs ) =>
         {
-            if(error)
+            if ( error )
             {
-                callback(error);
+                callback( error );
                 return;
             }
 
@@ -67,9 +67,10 @@ class RNSyncStorage {
                 docs = docs.map( doc => JSON.parse( doc ) )
             }
 
-            let keys = docs.map( doc => {
+            let keys = docs.map( doc =>
+            {
                 return doc.id
-            })
+            } )
 
             callback( null, keys );
         } );
@@ -77,51 +78,55 @@ class RNSyncStorage {
 
     deleteAllKeys( callback )
     {
-        this.getAllKeys( (error, keys ) =>
+        this.getAllKeys( ( error, keys ) =>
         {
-            if(error)
+            if ( error )
             {
-                callback(error)
+                callback( error )
             }
             else
             {
-                for (let i = 0; i < keys.length; i++) {
-                    let key = keys[i];
-                    this.removeItem(key)
+                for ( let i = 0; i < keys.length; i++ )
+                {
+                    let key = keys[ i ];
+                    this.removeItem( key )
                 }
 
-                callback(null)
+                callback( null )
             }
 
-        })
+        } )
     }
 }
 
-class RNSyncWrapper
+export class RNSync
 {
-    // TODO specify the name of the local datastore
-    init ( cloudantServerUrl, databaseName, callback )
+    constructor( cloudantServerUrl, databaseName )
     {
-        callback = callback || noop;
+        this.databaseUrl = cloudantServerUrl + '/' + databaseName
+        this.databaseName = databaseName
+    }
 
+    init( callback )
+    {
         return new Promise( ( resolve, reject ) =>
         {
-            var databaseUrl = cloudantServerUrl + '/' + databaseName;
+            callback = callback || noop;
 
-            rnsyncModule.init( databaseUrl, error =>
+            rnsyncModule.init( this.databaseUrl, this.databaseName, error =>
             {
-                callback( error );
-                if(error) reject(error);
-                else resolve()
-            } );
+                callback( error )
+
+                error == null ? resolve() : reject( error )
+            } )
         } )
     }
 
-    create ( body, id, callback )
+    create( body, id, callback )
     {
         callback = callback || noop;
 
-        if ( typeof(body) === 'string' && typeof(id) === 'function')
+        if ( typeof(body) === 'string' && typeof(id) === 'function' )
         {
             callback = id;
 
@@ -143,60 +148,59 @@ class RNSyncWrapper
             id = null;
         }
 
-        return new Promise( (resolve, reject) =>
+        return new Promise( ( resolve, reject ) =>
         {
-            rnsyncModule.create( body, id, ( error, doc ) =>
+            rnsyncModule.create( this.databaseName, body, id, ( error, doc ) =>
             {
                 callback( error, doc );
-                if(error) reject(error);
-                else resolve(doc)
+                error == null ? resolve( doc ) : reject( error )
             } );
-        })
+        } )
     }
 
-    retrieve ( id, callback )
+    retrieve( id, callback )
     {
         callback = callback || noop;
 
-        return new Promise( (resolve, reject) =>
+        return new Promise( ( resolve, reject ) =>
         {
-            rnsyncModule.retrieve( id, ( error, doc ) =>
+            rnsyncModule.retrieve( this.databaseName, id, ( error, doc ) =>
             {
                 callback( error, doc );
-                if(error) reject(error);
-                else resolve(doc)
+
+                error == null ? resolve( doc ) : reject( error )
             } );
-        })
+        } )
     }
 
-    findOrCreate ( id, callback )
+    findOrCreate( id, callback )
     {
         callback = callback || noop;
 
-        return new Promise( (resolve, reject) =>
+        return new Promise( ( resolve, reject ) =>
         {
-            rnsyncModule.retrieve( id,  ( error, doc ) =>
+            rnsyncModule.retrieve( this.databaseName, id, ( error, doc ) =>
             {
                 if ( error === 404 )
                 {
-                    this.create( null, id, (error, doc) =>
+                    this.create( null, id, ( error, doc ) =>
                     {
                         callback( error, doc );
-                        if(error) reject(error);
-                        else resolve(doc)
-                    })
+
+                        error == null ? resolve( doc ) : reject( error )
+                    } )
                 }
                 else
                 {
                     callback( error, doc );
-                    if(error) reject(error);
-                    else resolve(doc)
+
+                    error == null ? resolve( doc ) : reject( error )
                 }
-            });
-        })
+            } );
+        } )
     }
 
-    update ( id, rev, body, callback )
+    update( id, rev, body, callback )
     {
         callback = callback || noop;
 
@@ -208,18 +212,18 @@ class RNSyncWrapper
             body = doc.body;
         }
 
-        return new Promise( (resolve, reject) =>
+        return new Promise( ( resolve, reject ) =>
         {
-            rnsyncModule.update( id, rev, body, ( error, doc ) =>
+            rnsyncModule.update( this.databaseName, id, rev, body, ( error, doc ) =>
             {
                 callback( error, doc );
-                if(error) reject(error);
-                else resolve(doc)
+
+                error == null ? resolve( doc ) : reject( error )
             } );
-        })
+        } )
     }
 
-    delete ( id, callback )
+    delete( id, callback )
     {
         callback = callback || noop;
 
@@ -228,15 +232,14 @@ class RNSyncWrapper
             id = id.id; // doc.id
         }
 
-        return new Promise( (resolve, reject) =>
+        return new Promise( ( resolve, reject ) =>
         {
-            rnsyncModule.delete( id, ( error ) =>
+            rnsyncModule.delete( this.databaseName, id, ( error ) =>
             {
                 callback( error );
-                if(error) reject(error);
-                else resolve()
+                error == null ? resolve() : reject( error )
             } );
-        });
+        } );
 
     }
 
@@ -247,59 +250,60 @@ class RNSyncWrapper
         var pushPromise = this.replicatePush();
         var pullPromise = this.replicatePull();
 
-        return Promise.all([pushPromise, pullPromise])
-            .then(callback)
-            .catch( e => {
-                callback(e);
+        return Promise.all( [ pushPromise, pullPromise ] )
+            .then( callback )
+            .catch( e =>
+            {
+                callback( e );
                 throw(e);
-            })
+            } )
     }
 
-    replicatePush ( callback )
+    replicatePush( callback )
     {
         callback = callback || noop;
 
-        return new Promise( (resolve, reject) =>
+        return new Promise( ( resolve, reject ) =>
         {
-            rnsyncModule.replicatePush( (error) =>
+            rnsyncModule.replicatePush( this.databaseName, ( error ) =>
             {
                 callback( error );
-                if(error) reject(error);
-                else resolve()
-            })
-        });
+
+                error == null ? resolve() : reject( error )
+            } )
+        } );
     }
 
-    replicatePull ( callback )
+    replicatePull( callback )
     {
         callback = callback || noop;
 
-        return new Promise( (resolve, reject) =>
+        return new Promise( ( resolve, reject ) =>
         {
-            rnsyncModule.replicatePull( (error) =>
+            rnsyncModule.replicatePull( this.databaseName, ( error ) =>
             {
                 callback( error );
-                if(error) reject(error);
-                else resolve()
-            })
-        });
+
+                error == null ? resolve() : reject( error )
+            } )
+        } );
     }
 
     // For how to create a query: https://github.com/cloudant/CDTDatastore/blob/master/doc/query.md
     // The 'fields' arugment is for projection.  Its an array of fields that you want returned when you do not want the entire doc
-    find ( query, fields, callback )
+    find( query, fields, callback )
     {
         callback = callback || noop;
 
-        if(typeof(fields) === 'function')
+        if ( typeof(fields) === 'function' )
         {
             callback = fields;
             fields = null;
         }
 
-        return new Promise( (resolve, reject) =>
+        return new Promise( ( resolve, reject ) =>
         {
-            rnsyncModule.find( query, fields, ( error, docs ) =>
+            rnsyncModule.find( this.databaseName, query, fields, ( error, docs ) =>
             {
                 if ( !error && Platform.OS === "android" )
                 {
@@ -307,11 +311,39 @@ class RNSyncWrapper
                 }
 
                 callback( error, docs );
-                if(error) reject(error);
-                else resolve(docs)
+
+                error == null ? resolve( docs ) : reject( error )
             } );
 
-        });
+        } );
+    }
+}
+
+
+// TODO This class exist only for the purpose of not screwing up backawards compat.  Should go away in next major release
+class RNSyncWrapper extends RNSync
+{
+    constructor()
+    {
+        super()
+    }
+
+    init( cloudantUrl, databaseName, callback )
+    {
+        this.databaseUrl = cloudantUrl + '/' + databaseName
+        this.databaseName = databaseName
+
+        callback = callback || noop;
+
+        return new Promise( ( resolve, reject ) =>
+        {
+            rnsyncModule.init( this.databaseUrl, this.databaseName, error =>
+            {
+                callback( error )
+
+                error == null ? resolve() : reject( error )
+            } )
+        } )
     }
 }
 

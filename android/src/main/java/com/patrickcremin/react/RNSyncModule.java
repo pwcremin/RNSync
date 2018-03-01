@@ -38,35 +38,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
-class Listener {
-
-    private final CountDownLatch latch;
-    Throwable error = null;
-    int documentsReplicated;
-    int batchesReplicated;
-
-    Listener(CountDownLatch latch) {
-        this.latch = latch;
-    }
-
-    @Subscribe
-    public void complete(ReplicationCompleted event) {
-        this.documentsReplicated = event.documentsReplicated;
-        this.batchesReplicated = event.batchesReplicated;
-        latch.countDown();
-    }
-
-    @Subscribe
-    public void error(ReplicationErrored event) {
-        this.error = event.errorInfo;
-        latch.countDown();
-    }
-}
-
 public class RNSyncModule extends ReactContextBaseJavaModule {
 
     private URI uri;
-    private DocumentStore ds;
+    //private DocumentStore ds;
+    private Map<String, DocumentStore> documentStores;
+    private String datastoreDir = "datastores"; // TODO should this be configurable?
 
     RNSyncModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -79,16 +56,30 @@ public class RNSyncModule extends ReactContextBaseJavaModule {
 
     // TODO let them name the datastore
     @ReactMethod
-    public void init(String databaseUrl, Callback callback) {
-        String datastoreDir = "datastores";
-        String datastoreName = "my_datastore";
+    public void init(String databaseUrl, String datastoreName, Callback callback) {
 
         try {
+            uri = new URI(databaseUrl);
+        }
+        catch (Exception e)
+        {
+            callback.invoke(e.getMessage());
+            return;
+        }
+
+        if(documentStores == null)
+        {
+            documentStores = new HashMap<String, DocumentStore>();
+        }
+
+        try{
             File path = super.getReactApplicationContext()
                     .getApplicationContext()
                     .getDir(datastoreDir, Context.MODE_PRIVATE);
-            ds = DocumentStore.getInstance(new File(path, datastoreName));
-            uri = new URI(databaseUrl);
+
+            DocumentStore ds = DocumentStore.getInstance(new File(path, datastoreName));
+
+            documentStores.put(datastoreName, ds);
         }
         catch (Exception e)
         {
@@ -99,9 +90,10 @@ public class RNSyncModule extends ReactContextBaseJavaModule {
         callback.invoke();
     }
 
-    // TODO need push and pull replication functions
     @ReactMethod
-    public void replicatePush(Callback callback) {
+    public void replicatePush(String storeName, Callback callback) {
+
+        DocumentStore ds = documentStores.get(storeName);
 
         // Replicate from the local to remote database
         Replicator replicator = ReplicatorBuilder.push().from(ds).to(uri).build();
@@ -135,7 +127,9 @@ public class RNSyncModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void replicatePull(Callback callback) {
+    public void replicatePull(String storeName, Callback callback) {
+
+        DocumentStore ds = documentStores.get(storeName);
 
         // Replicate from the local to remote database
         Replicator replicator = ReplicatorBuilder.pull().from(uri).to(ds).build();
@@ -170,7 +164,9 @@ public class RNSyncModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void create(ReadableMap body, String id, Callback callback) {
+    public void create(String storeName, ReadableMap body, String id, Callback callback) {
+
+        DocumentStore ds = documentStores.get(storeName);
 
         ReadableNativeMap nativeBody = (ReadableNativeMap) body;
 
@@ -205,7 +201,9 @@ public class RNSyncModule extends ReactContextBaseJavaModule {
 
     // TODO need ability to update and remove attachments
     @ReactMethod
-    public void addAttachment(String id, String name, String path, String type, Callback callback) {
+    public void addAttachment(String storeName, String id, String name, String path, String type, Callback callback) {
+
+        DocumentStore ds = documentStores.get(storeName);
 
         try{
             DocumentRevision revision = ds.database().read(id);
@@ -228,7 +226,10 @@ public class RNSyncModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void retrieve(String id, Callback callback) {
+    public void retrieve(String storeName, String id, Callback callback) {
+
+        DocumentStore ds = documentStores.get(storeName);
+
         try{
             DocumentRevision revision = ds.database().read(id);
 
@@ -242,7 +243,9 @@ public class RNSyncModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void update(String id, String rev, ReadableMap body, Callback callback) {
+    public void update(String storeName, String id, String rev, ReadableMap body, Callback callback) {
+
+        DocumentStore ds = documentStores.get(storeName);
 
         try {
             DocumentRevision revision = ds.database().read(id);
@@ -264,7 +267,9 @@ public class RNSyncModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void delete(String id, Callback callback) {
+    public void delete(String storeName, String id, Callback callback) {
+
+        DocumentStore ds = documentStores.get(storeName);
 
         try {
             DocumentRevision revision = ds.database().read(id);
@@ -280,7 +285,9 @@ public class RNSyncModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void find(ReadableMap query, ReadableArray fields, Callback callback) {
+    public void find(String storeName, ReadableMap query, ReadableArray fields, Callback callback) {
+
+        DocumentStore ds = documentStores.get(storeName);
 
         try {
             ReadableNativeMap nativeQuery = (ReadableNativeMap) query;
@@ -288,14 +295,14 @@ public class RNSyncModule extends ReactContextBaseJavaModule {
             QueryResult result;
 
             if (fields == null) {
-                result = this.ds.query().find(nativeQuery.toHashMap(), 0, 0, null, null);
+                result = ds.query().find(nativeQuery.toHashMap(), 0, 0, null, null);
             } else {
                 List<String> fieldsList = new ArrayList<>();
                 for (int i = 0; i < fields.size(); i++) {
                     fieldsList.add(fields.getString(i));
                 }
 
-                result = this.ds.query().find(nativeQuery.toHashMap(), 0, 0, fieldsList, null);
+                result = ds.query().find(nativeQuery.toHashMap(), 0, 0, fieldsList, null);
             }
 
             WritableArray docs = new WritableNativeArray();
@@ -313,8 +320,7 @@ public class RNSyncModule extends ReactContextBaseJavaModule {
         }
     }
 
-    private HashMap<String, Object> createDoc(DocumentRevision revision)
-    {
+    private HashMap<String, Object> createDoc(DocumentRevision revision) {
         HashMap<String, Object> doc = new HashMap<>();
         doc.put("id", revision.getId());
         doc.put("rev", revision.getRevision());

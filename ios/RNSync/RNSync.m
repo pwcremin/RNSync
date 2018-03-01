@@ -9,28 +9,28 @@
 #import "RNSync.h"
 #import <React/RCTBridge.h>
 #import <React/RCTEventDispatcher.h>
-#import "ReplicationManager.h";
+#import "ReplicationManager.h"
 #import "CloudantSync.h"
-
+#import "RNSyncDataStore.h"
 
 @implementation RNSync
 {
-    CDTDatastore *datastore;
+    //CDTDatastore *datastore;
     CDTDatastoreManager *manager;
-    CDTReplicator *replicator;
-    CDTReplicatorFactory *replicatorFactory;
-    NSURL *remoteDatabaseURL;
-    RCTResponseSenderBlock replicatorDidCompleteCallback;
-    RCTResponseSenderBlock replicatorDidErrorCallback;
-    ReplicationManager* replicationManager;
+    //CDTReplicator *replicator;
+    //CDTReplicatorFactory *replicatorFactory;
+    //NSURL *remoteDatabaseURL;
+    //RCTResponseSenderBlock replicatorDidCompleteCallback;
+    //RCTResponseSenderBlock replicatorDidErrorCallback;
+    //ReplicationManager* replicationManager;
+    NSMutableDictionary *datastores;
+    NSString *databaseUrl;
 }
 
-
-@synthesize bridge = _bridge;
+//@synthesize bridge = _bridge;
 
 RCT_EXPORT_MODULE();
 
-// TODO make sure this is the best way to create an objc singleton
 + (id)allocWithZone:(NSZone *)zone
 {
     static RNSync *sharedInstance = nil;
@@ -39,56 +39,83 @@ RCT_EXPORT_MODULE();
     return sharedInstance;
 }
 
-// TODO need to let them name their own datastore! else could conflict with other apps?
-RCT_EXPORT_METHOD(init: (NSString *)databaseUrl callback:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(init: (NSString *)databaseUrl databaseName:(NSString *)databaseName callback:(RCTResponseSenderBlock)callback)
 {
+    self->databaseUrl = databaseUrl;
+    
     // Create a CDTDatastoreManager using application internal storage path
     NSError *error = nil;
     NSFileManager *fileManager= [NSFileManager defaultManager];
-    
+
     NSURL *documentsDir = [[fileManager URLsForDirectory:NSDocumentDirectory
                                                inDomains:NSUserDomainMask] lastObject];
     NSURL *storeURL = [documentsDir URLByAppendingPathComponent:@"datastores"];
     NSString *path = [storeURL path];
+
+    if(!manager)
+    {
+        manager = [[CDTDatastoreManager alloc] initWithDirectory:path error:&error];
+        
+        if(error)
+        {
+            callback(@[[NSNumber numberWithLong:error.code]]);
+            return;
+        }
+    }
     
-    manager = [[CDTDatastoreManager alloc] initWithDirectory:path error:&error];
+    if(!datastores)
+    {
+        datastores = [NSMutableDictionary new];
+    }
+    
+    RNSyncDataStore *datastore = [[RNSyncDataStore alloc] initWithData:databaseName manager:manager databaseUrl:databaseUrl error:&error];
     
     if(error)
     {
         callback(@[[NSNumber numberWithLong:error.code]]);
-        return;
     }
-    
-    // TODO datastore name needs to be configurable
-    datastore = [manager datastoreNamed:@"rnsync_datastore" error:&error];
-    
-    if(error)
-    {
-        callback(@[[NSNumber numberWithLong:error.code]]);
-        return;
+    else {
+        datastores[databaseName] = datastore;
+        callback(@[[NSNull null]]);
     }
-    
-    replicatorFactory = [[CDTReplicatorFactory alloc] initWithDatastoreManager:manager];
-    
-    remoteDatabaseURL = [NSURL URLWithString:databaseUrl];
-    
-    replicationManager = [[ReplicationManager alloc] initWithData:remoteDatabaseURL datastore:datastore replicatorFactory:replicatorFactory];
-    
-    callback(@[[NSNull null]]);
 }
 
-RCT_EXPORT_METHOD(replicatePush: (RCTResponseSenderBlock)callback)
+//RCT_EXPORT_METHOD(createStore: (NSString *)storeName callback:(RCTResponseSenderBlock)callback)
+//{
+//    NSError *error = nil;
+//
+//    RNSyncDataStore *datastore = [[RNSyncDataStore alloc] initWithData:storeName manager:manager databaseUrl:databaseUrl error:&error];
+//
+//    if(error)
+//    {
+//        callback(@[[NSNumber numberWithLong:error.code]]);
+//    }
+//    else
+//    {
+//        [datastores setObject:datastore forKey:storeName];
+//        callback(@[[NSNull null]]);
+//    }
+//}
+
+
+RCT_EXPORT_METHOD(replicatePush: (NSString *)storeName callback: (RCTResponseSenderBlock)callback)
 {
-    [replicationManager push: callback];
+    RNSyncDataStore *rnsyncStore = datastores[storeName];
+    
+    [rnsyncStore.replicationManager push: callback];
 }
 
-RCT_EXPORT_METHOD(replicatePull: (RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(replicatePull: (NSString *)storeName callback: (RCTResponseSenderBlock)callback)
 {
-    [replicationManager pull: callback];
+    RNSyncDataStore *rnsyncStore = datastores[storeName];
+    
+    [rnsyncStore.replicationManager pull: callback];
 }
 
-RCT_EXPORT_METHOD(create: body id:(NSString*)id callback:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(create: (NSString *)storeName body:(NSDictionary *)body id:(NSString*)id callback:(RCTResponseSenderBlock)callback)
 {
+    RNSyncDataStore *rnsyncStore = datastores[storeName];
+    
     NSError *error = nil;
     
     CDTDocumentRevision *rev;
@@ -102,17 +129,17 @@ RCT_EXPORT_METHOD(create: body id:(NSString*)id callback:(RCTResponseSenderBlock
         rev = [CDTDocumentRevision revision];
     }
     
-    
     if(!body)
     {
-        body = @{};
+        body =  @{};
     }
     
-    rev.body = body;
+    rev.body = [body mutableCopy];
     
     // Save the document to the database
     // revision is nil on failure
-    CDTDocumentRevision *revision = [datastore createDocumentFromRevision:rev error:&error];
+    CDTDocumentRevision *revision = [rnsyncStore.datastore createDocumentFromRevision:rev error:&error];
+    
     if(!revision)
     {
         callback(@[@"document failed to save"]);
@@ -130,11 +157,13 @@ RCT_EXPORT_METHOD(create: body id:(NSString*)id callback:(RCTResponseSenderBlock
     
 }
 
-RCT_EXPORT_METHOD(addAttachment: id name:(NSString*)name path:(NSString*)path type:(NSString*)type callback:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(addAttachment: (NSString *)storeName id:(NSString *)id name:(NSString*)name path:(NSString*)path type:(NSString*)type callback:(RCTResponseSenderBlock)callback)
 {
+    RNSyncDataStore *rnsyncStore = datastores[storeName];
+    
     NSError *error = nil;
     
-    CDTDocumentRevision *revision = [datastore getDocumentWithId:id error:&error];
+    CDTDocumentRevision *revision = [rnsyncStore.datastore getDocumentWithId:id error:&error];
     
     if(error)
     {
@@ -150,7 +179,7 @@ RCT_EXPORT_METHOD(addAttachment: id name:(NSString*)name path:(NSString*)path ty
     
     revision.attachments[att.name] = att;
     
-    CDTDocumentRevision *updated = [datastore updateDocumentFromRevision:revision error:&error];
+    CDTDocumentRevision *updated = [rnsyncStore.datastore updateDocumentFromRevision:revision error:&error];
     
     NSDictionary *dict = @{ @"id" : updated.docId, @"rev" : updated.revId, @"body" : updated.body };
     
@@ -164,12 +193,14 @@ RCT_EXPORT_METHOD(addAttachment: id name:(NSString*)name path:(NSString*)path ty
     }
 }
 
-RCT_EXPORT_METHOD(retrieve: (NSString *)id callback:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(retrieve: (NSString *)storeName id:(NSString *)id callback:(RCTResponseSenderBlock)callback)
 {
+    RNSyncDataStore *rnsyncStore = datastores[storeName];
+    
     NSError *error = nil;
     
     // Read a document
-    CDTDocumentRevision *revision = [datastore getDocumentWithId:id error:&error];
+    CDTDocumentRevision *revision = [rnsyncStore.datastore getDocumentWithId:id error:&error];
     
     if(!error)
     {
@@ -183,16 +214,18 @@ RCT_EXPORT_METHOD(retrieve: (NSString *)id callback:(RCTResponseSenderBlock)call
     }
 }
 
-RCT_EXPORT_METHOD(update: (NSString *)id rev:(NSString *)rev  body:(NSDictionary *)body callback:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(update: (NSString *)storeName id:(NSString *)id rev:(NSString *)rev  body:(NSDictionary *)body callback:(RCTResponseSenderBlock)callback)
 {
+    RNSyncDataStore *rnsyncStore = datastores[storeName];
+    
     NSError *error = nil;
     
     // Read a document
-    CDTDocumentRevision *retrieved = [datastore getDocumentWithId:id rev:rev error:&error];
+    CDTDocumentRevision *retrieved = [rnsyncStore.datastore getDocumentWithId:id rev:rev error:&error];
     
     retrieved.body = (NSMutableDictionary*)body;
     
-    CDTDocumentRevision *updated = [datastore updateDocumentFromRevision:retrieved
+    CDTDocumentRevision *updated = [rnsyncStore.datastore updateDocumentFromRevision:retrieved
                                                                    error:&error];
     
     NSDictionary *dict = @{ @"id" : updated.docId, @"rev" : updated.revId, @"body" : updated.body };
@@ -208,7 +241,7 @@ RCT_EXPORT_METHOD(update: (NSString *)id rev:(NSString *)rev  body:(NSDictionary
 }
 
 
-RCT_EXPORT_METHOD(delete: (NSString *)id callback:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(delete: (NSString *)storeName id:(NSString *)id callback:(RCTResponseSenderBlock)callback)
 {
     if(!id)
     {
@@ -217,11 +250,13 @@ RCT_EXPORT_METHOD(delete: (NSString *)id callback:(RCTResponseSenderBlock)callba
         return;
     }
     
+    RNSyncDataStore *rnsyncStore = datastores[storeName];
+    
     NSError *error = nil;
     
-    CDTDocumentRevision *retrieved = [datastore getDocumentWithId:id error:&error];
+    CDTDocumentRevision *retrieved = [rnsyncStore.datastore getDocumentWithId:id error:&error];
     
-    [datastore deleteDocumentFromRevision:retrieved
+    [rnsyncStore.datastore deleteDocumentFromRevision:retrieved
                                     error:&error];
     if(!error)
     {
@@ -233,14 +268,20 @@ RCT_EXPORT_METHOD(delete: (NSString *)id callback:(RCTResponseSenderBlock)callba
     }
 }
 
-RCT_EXPORT_METHOD(deleteDatastore: (RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(deleteDatastore: (NSString *)storeName callback:(RCTResponseSenderBlock)callback)
 {
+    // TODO remove from stores[]
     NSError *error = nil;
     
-    BOOL deleted = [manager deleteDatastoreNamed:@"rnsync_datastore" error: &error];
+    BOOL deleted = [manager deleteDatastoreNamed:storeName error: &error];
     
     if(!error)
     {
+        if(deleted)
+        {
+            [datastores removeObjectForKey:storeName];
+        }
+        
         //NSArray *params = @[[NSNumber numberWithBool:deleted]];
         callback(@[[NSNull null], [NSNumber numberWithBool:deleted]]);
     }
@@ -252,12 +293,14 @@ RCT_EXPORT_METHOD(deleteDatastore: (RCTResponseSenderBlock)callback)
 
 // TODO the results of the query could be huge (run out of memory huge).  Need param for how many items
 // to return and paging to get the rest
-RCT_EXPORT_METHOD(find: (NSDictionary *)query fields:(NSArray *)fields callback:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(find: (NSString *)storeName query:(NSDictionary *)query fields:(NSArray *)fields callback:(RCTResponseSenderBlock)callback)
 {
+    RNSyncDataStore *rnsyncStore = datastores[storeName];
+    
     // TODO waste to new up resultList for every call
     NSMutableArray* resultList = [[NSMutableArray alloc] init];
     
-    CDTQResultSet *result = [datastore find:query
+    CDTQResultSet *result = [rnsyncStore.datastore find:query
                                        skip:0
                                       limit:0
                                      fields:fields
