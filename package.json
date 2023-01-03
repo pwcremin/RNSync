@@ -17,6 +17,6 @@
   "author": "Patrick Cremin <pwcremin@gmail.com> (https://github.com/pwcremin)",
   "license": "MIT",
   "devDependencies": {
-    "react-native": "^0.40"
+    "react-native": "^0.70"
   }
 }
